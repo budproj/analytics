@@ -1,0 +1,28 @@
+name: analytics
+version: 1.0.0
+config-version: 2
+profile: normalize
+
+source-paths:
+  - dbt/models
+analysis-paths:
+  - dbt/analysis
+test-paths:
+  - dbt/tests
+data-paths:
+  - dbt/data
+macro-paths:
+  - dbt/macros
+snapshot-paths:
+  - dbt/snapshots
+target-path: dbt/target
+clean-targets:
+  - dbt/target
+  - dbt_modules
+
+models:
+  analytics:
+    data_marts:
+      +materialized: table
+      okr:
+        +schema: dm_okr
