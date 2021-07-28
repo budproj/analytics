@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: conformed
+    description: '{{ doc("sources_conformed") }}'
+    database: dw001
+    schema: conformed
+    tables:
+      - name: okr__user
+        description: '{{ doc("sources_conformed_okr__user") }}'
+
+models:
+  - name: dim__user
+    columns:
+      - name: id
