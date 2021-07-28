@@ -25,10 +25,14 @@ with
         event_time in (
           select max(event_time) from events where event_type = 'PageView' group by user_id
         )
+  ),
+
+  final as (
+    select
+      id,
+      event_time as last_access_time
+      from users
+        left join latest_pageview_by_user on latest_pageview_by_user.user_id = users.id
   )
 
-select
-  id,
-  event_time as last_access_time
-  from users
-    left join latest_pageview_by_user on latest_pageview_by_user.user_id = users.id
+select * from final

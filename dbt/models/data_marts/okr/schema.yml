@@ -2,20 +2,19 @@ version: 2
 
 sources:
   - name: conformed
-    description: '{{ doc("sources_conformed") }}'
     database: dw001
     schema: conformed
     tables:
       - name: okr__user
-        description: '{{ doc("sources_conformed_okr__user") }}'
       - name: amplitude__events
-        description: '{{ doc("sources_conformed_amplitude__events") }}'
 
 models:
   - name: dim__user
-    description: '{{ doc("okr_dim__user_description") }}'
     columns:
       - name: id
-        description: '{{ doc("column_id") }}'
       - name: last_access_time
-        description: '{{ doc("okr_dim__user_last_access_time_column") }}'
+
+  - name: fct__user_acesses
+    columns:
+      - name: user_id
+      - name: access_time
