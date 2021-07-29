@@ -23,7 +23,7 @@ with
     select * from stg_okr__user
   ),
 
-  events as (
+  amplitude_event as (
     select user_id, event_time, event_type from stg_amplitude__events
   ),
 
@@ -31,11 +31,11 @@ with
     select 
       user_id,
       event_time
-      from events
+      from amplitude_event
       where
         event_type = 'PageView' and
         event_time in (
-          select max(event_time) from events where event_type = 'PageView' group by user_id
+          select max(event_time) from amplitude_event where event_type = 'PageView' group by user_id
         )
   ),
 

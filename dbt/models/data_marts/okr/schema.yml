@@ -32,6 +32,18 @@ models:
       - name: last_access_time
       - name: type
 
+  - name: dim__team
+    columns:
+      - name: id
+      - name: name
+      - name: gender
+      - name: owner_id
+      - name: parent_id
+      - name: description
+      - name: created_at
+      - name: updated_at
+      - name: company_id
+
   - name: dim__company
     columns:
       - name: id
@@ -46,3 +58,8 @@ models:
     columns:
       - name: user_id
       - name: team_id
+
+  - name: fct__user_companies
+    columns:
+      - name: user_id
+      - name: company_id
