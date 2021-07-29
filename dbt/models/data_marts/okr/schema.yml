@@ -74,6 +74,23 @@ models:
       - name: updated_at
       - name: company_id
 
+  - name: dim__key_result
+    columns:
+      - name: id
+      - name: goal
+      - name: type
+      - name: title
+      - name: format
+      - name: team_id
+      - name: owner_id
+      - name: description
+      - name: objective_id
+      - name: cycle_id
+      - name: initial_value
+      - name: created_at
+      - name: updated_at
+      - name: company_id
+
   - name: fct__user_accesses
     columns:
       - name: user_id
