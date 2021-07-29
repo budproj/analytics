@@ -6,6 +6,7 @@ sources:
     schema: conformed
     tables:
       - name: okr__user
+      - name: okr__team
       - name: amplitude__events
 
 models:
@@ -13,6 +14,11 @@ models:
     columns:
       - name: id
       - name: last_access_time
+
+  - name: dim__company
+    columns:
+      - name: id
+      - name: name
 
   - name: fct__user_accesses
     columns:
