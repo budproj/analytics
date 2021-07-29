@@ -8,20 +8,33 @@ sources:
       - name: okr__user
       - name: okr__team
       - name: okr__team_users_user
+      - name: okr__cycle
+      - name: okr__objective
+      - name: okr__key_result
       - name: amplitude__events
 
 models:
   - name: dim__user
     columns:
       - name: id
+      - name: role
+      - name: about
       - name: email
+      - name: gender
+      - name: picture
+      - name: nickname
+      - name: authz_sub
+      - name: first_name
+      - name: last_name
+      - name: linked_in_profile_address
+      - name: created_at
+      - name: updated_at
       - name: last_access_time
       - name: type
 
   - name: dim__company
     columns:
       - name: id
-      - name: name
       - name: type
 
   - name: fct__user_accesses

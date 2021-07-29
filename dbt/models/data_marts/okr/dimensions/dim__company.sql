@@ -18,7 +18,6 @@ with
   final as  (
     select
       id,
-      name,
       case
         when (
           select count(*) from seed_buddy_companies_name where name = companies.name

@@ -20,7 +20,7 @@ with
   ),
 
   users as (
-    select id, email from stg_okr__user
+    select * from stg_okr__user
   ),
 
   events as (
@@ -42,7 +42,18 @@ with
   final as (
     select
       id,
+      role,
+      about,
       email,
+      gender,
+      picture,
+      nickname,
+      authz_sub,
+      first_name,
+      last_name,
+      linked_in_profile_address,
+      created_at,
+      updated_at,
       event_time as last_access_time,
       case
         when (
