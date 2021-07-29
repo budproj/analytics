@@ -63,6 +63,17 @@ models:
       - name: updated_at
       - name: company_id
 
+  - name: dim__objective
+    columns:
+      - name: id
+      - name: title
+      - name: team_id
+      - name: cycle_id
+      - name: owner_id
+      - name: created_at
+      - name: updated_at
+      - name: company_id
+
   - name: fct__user_accesses
     columns:
       - name: user_id
