@@ -152,3 +152,10 @@ models:
       - name: user_id
       - name: key_result_comment_id
       - name: created_at
+
+  - name: fct__user_received_key_result_comments
+    columns:
+      - name: user_id
+      - name: author_id
+      - name: key_result_comment_id
+      - name: created_at
