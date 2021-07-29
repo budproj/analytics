@@ -11,8 +11,16 @@ with
     select * from {{ ref('fct__user_teams') }}
   ),
 
+  seed_buddy_users_email as (
+    select email from {{ ref('buddy_users') }}
+  ),
+
+  seed_sandbox_users_email as (
+    select email from {{ ref('sandbox_users') }}
+  ),
+
   users as (
-    select id from stg_okr__user
+    select id, email from stg_okr__user
   ),
 
   events as (
@@ -34,7 +42,17 @@ with
   final as (
     select
       id,
-      event_time as last_access_time
+      email,
+      event_time as last_access_time,
+      case
+        when (
+          select count(*) from seed_buddy_users_email where email = users.email
+        ) = 1 then 'BUDDY'
+        when (
+          select count(*) from seed_sandbox_users_email where email = users.email
+        ) = 1 then 'SANDBOX'
+        else 'CUSTOMER'
+      end as type
       from users
         left join latest_pageview_by_user on latest_pageview_by_user.user_id = users.id
   )

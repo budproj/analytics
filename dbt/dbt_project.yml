@@ -9,9 +9,18 @@ seeds:
     buddy_companies:
       +column_types:
         name: varchar(32)
+
+    buddy_users:
+      +column_types:
+        email: varchar(32)
+
     sandbox_companies:
       +column_types:
         name: varchar(32)
+
+    sandbox_users:
+      +column_types:
+        email: varchar(128)
 
 models:
   analytics:

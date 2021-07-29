@@ -14,7 +14,9 @@ models:
   - name: dim__user
     columns:
       - name: id
+      - name: email
       - name: last_access_time
+      - name: type
 
   - name: dim__company
     columns:
