@@ -126,28 +126,28 @@ models:
       - name: user_id
       - name: access_time
 
-  - name: fct__user_teams
+  - name: fct__company_members
     columns:
-      - name: user_id
-      - name: team_id
-
-  - name: fct__user_companies
-    columns:
-      - name: user_id
       - name: company_id
+      - name: user_id
+
+  - name: fct__team_members
+    columns:
+      - name: team_id
+      - name: user_id
 
   - name: fct__user_active_key_results
     columns:
       - name: user_id
       - name: key_result_id
 
-  - name: fct__user_key_result_check_ins
+  - name: fct__user_created_key_result_check_ins
     columns:
       - name: user_id
       - name: key_result_check_in_id
       - name: created_at
 
-  - name: fct__user_key_result_comments
+  - name: fct__user_created_key_result_comments
     columns:
       - name: user_id
       - name: key_result_comment_id

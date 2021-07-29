@@ -7,10 +7,6 @@ with
     select * from {{ ref('stg_amplitude__events') }}
   ),
 
-  fct__user_teams as (
-    select * from {{ ref('fct__user_teams') }}
-  ),
-
   seed_buddy_users_email as (
     select email from {{ ref('buddy_users') }}
   ),
