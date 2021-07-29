@@ -49,6 +49,20 @@ models:
       - name: id
       - name: type
 
+  - name: dim__cycle
+    columns:
+      - name: id
+      - name: active
+      - name: period
+      - name: cadence
+      - name: team_id
+      - name: date_start
+      - name: date_end
+      - name: parent_id
+      - name: created_at
+      - name: updated_at
+      - name: company_id
+
   - name: fct__user_accesses
     columns:
       - name: user_id
