@@ -20,6 +20,7 @@ models:
     columns:
       - name: id
       - name: name
+      - name: type
 
   - name: fct__user_accesses
     columns:

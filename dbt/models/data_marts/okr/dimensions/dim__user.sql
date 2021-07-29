@@ -7,6 +7,10 @@ with
     select * from {{ ref('stg_amplitude__events') }}
   ),
 
+  fct__user_teams as (
+    select * from {{ ref('fct__user_teams') }}
+  ),
+
   users as (
     select id from stg_okr__user
   ),

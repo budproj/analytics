@@ -3,6 +3,16 @@ version: 1.0.0
 config-version: 2
 profile: normalize
 
+seeds:
+  analytics:
+    +schema: seeds
+    buddy_companies:
+      +column_types:
+        name: varchar(32)
+    sandbox_companies:
+      +column_types:
+        name: varchar(32)
+
 models:
   analytics:
     data_marts:
