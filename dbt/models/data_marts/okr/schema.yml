@@ -12,6 +12,7 @@ sources:
       - name: okr__objective
       - name: okr__key_result
       - name: okr__key_result_check_in
+      - name: okr__key_result_comment
       - name: amplitude__events
 
 models:
@@ -102,6 +103,19 @@ models:
       - name: confidence
       - name: key_result_id
       - name: created_at
+      - name: objective_id
+      - name: cycle_id
+      - name: team_id
+      - name: company_id
+
+  - name: dim__key_result_comment
+    columns:
+      - name: id
+      - name: text
+      - name: user_id
+      - name: key_result_id
+      - name: created_at
+      - name: updated_at
       - name: objective_id
       - name: cycle_id
       - name: team_id
