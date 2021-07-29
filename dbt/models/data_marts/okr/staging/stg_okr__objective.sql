@@ -4,7 +4,15 @@ with
   ),
 
   final as (
-    select * from src_okr__objective
+    select
+      id,
+      title,
+      team_id,
+      cycle_id,
+      owner_id,
+      created_at,
+      updated_at
+    from src_okr__objective
   )
 
 select * from final

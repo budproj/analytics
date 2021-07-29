@@ -4,7 +4,7 @@ with
   ),
 
   final as (
-    select * from stg_okr__team_users_user
+    select team_id, user_id from stg_okr__team_users_user
   )
 
 select * from final

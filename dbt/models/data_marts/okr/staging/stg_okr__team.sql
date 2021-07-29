@@ -18,12 +18,25 @@ with recursive
     on t.parent_id = p.id
   ),
 
+  team as (
+    select 
+      id,
+      name,
+      gender,
+      owner_id,
+      parent_id,
+      description,
+      created_at,
+      updated_at
+    from src_okr__team
+  ),
+
   final as (
     select
-      src_okr__team.*,
+      team.*,
       team_parents.root_id as company_id
-      from src_okr__team
-      left join team_parents on team_parents.id = src_okr__team.id
+      from team
+      left join team_parents on team_parents.id = team.id
   )
 
 select * from final

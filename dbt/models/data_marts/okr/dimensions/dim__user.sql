@@ -41,19 +41,7 @@ with
 
   final as (
     select
-      id,
-      role,
-      about,
-      email,
-      gender,
-      picture,
-      nickname,
-      authz_sub,
-      first_name,
-      last_name,
-      linked_in_profile_address,
-      created_at,
-      updated_at,
+      users.*,
       event_time as last_access_time,
       case
         when (
