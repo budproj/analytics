@@ -7,6 +7,7 @@ sources:
     tables:
       - name: okr__user
       - name: okr__team
+      - name: okr__team_users_user
       - name: amplitude__events
 
 models:
@@ -24,3 +25,8 @@ models:
     columns:
       - name: user_id
       - name: access_time
+
+  - name: fct__user_teams
+    columns:
+      - name: user_id
+      - name: team_id
