@@ -218,3 +218,30 @@ models:
       - name: cadence
       - name: progress
       - name: date
+
+  - name: fct__company_historic_progress
+    columns:
+      - name: company_id
+      - name: progress
+      - name: date
+
+  - name: fct__company_active_progress
+    columns:
+      - name: company_id
+      - name: progress
+      - name: date
+
+  - name: fct__company_cycle_progress
+    columns:
+      - name: company_id
+      - name: cycle_id
+      - name: progress
+      - name: date
+
+  - name: fct__company_cadence_progress
+    columns:
+      - name: company_id
+      - name: cycle_id
+      - name: cadence
+      - name: progress
+      - name: date
