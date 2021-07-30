@@ -191,3 +191,9 @@ models:
       - name: cadence
       - name: progress
       - name: date
+
+  - name: fct__team_historic_progress
+    columns:
+      - name: team_id
+      - name: progress
+      - name: date
