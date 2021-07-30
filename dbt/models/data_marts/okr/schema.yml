@@ -176,3 +176,10 @@ models:
       - name: user_id
       - name: progress
       - name: date
+
+  - name: fct__user_cycle_progress
+    columns:
+      - name: user_id
+      - name: cycle_id
+      - name: progress
+      - name: date
