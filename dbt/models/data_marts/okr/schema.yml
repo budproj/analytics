@@ -37,6 +37,8 @@ models:
   - name: dim__company
     columns:
       - name: id
+      - name: team_id
+      - name: name
       - name: type
 
   - name: dim__team
