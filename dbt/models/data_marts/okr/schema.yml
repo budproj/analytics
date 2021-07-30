@@ -197,3 +197,9 @@ models:
       - name: team_id
       - name: progress
       - name: date
+
+  - name: fct__team_active_progress
+    columns:
+      - name: team_id
+      - name: progress
+      - name: date
