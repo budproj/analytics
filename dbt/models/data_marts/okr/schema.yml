@@ -245,3 +245,9 @@ models:
       - name: cadence
       - name: progress
       - name: date
+
+  - name: fct_cycle_progress
+    columns:
+      - name: cycle_id
+      - name: progress
+      - name: date
