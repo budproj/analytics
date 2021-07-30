@@ -3,6 +3,10 @@ with recursive
     select * from {{ ref('stg_okr__team') }}
   ),
 
+  company as (
+    select * from {{ ref('dim__company') }}
+  ),
+
   team_parents(id, parent_id, root_id) as (
     -- Get root nodes
     select id, parent_id, id as root_id
@@ -34,9 +38,10 @@ with recursive
   final as (
     select
       team.*,
-      team_parents.root_id as company_id
+      company.id as company_id
       from team
       left join team_parents on team_parents.id = team.id
+      left join company on company.team_id = team_parents.root_id
   )
 
 select * from final
