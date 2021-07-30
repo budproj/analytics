@@ -15,7 +15,7 @@ with
     select * from {{ ref('dim__key_result_check_in') }}
   ),
 
-  user_progress_in_key_result as (
+  user_key_result_progress as (
     select
       users.id as user_id,
       {{ calculate_progress('key_result_check_in', 'key_result') }} as progress,
@@ -31,7 +31,7 @@ with
       user_id,
       avg(progress) as progress,
       max(date) as date
-      from user_progress_in_key_result
+      from user_key_result_progress
       group by user_id
   )
 

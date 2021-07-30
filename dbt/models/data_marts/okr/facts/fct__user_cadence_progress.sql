@@ -23,6 +23,8 @@ with
     select
       users.id as user_id,
       cycle.id as cycle_id,
+      cycle.date_start as cycle_date_start,
+      cycle.cadence as cadence,
       {{ calculate_progress('key_result_check_in', 'key_result') }} as progress,
       key_result_check_in.created_at as date
       from users
@@ -32,14 +34,34 @@ with
       left join cycle on key_result.cycle_id = cycle.id
   ),
 
+  user_progress_in_cycle as (
+    select
+      user_id,
+      cycle_id,
+      cycle_date_start,
+      cadence,
+      avg(progress) as progress,
+      max(date) as date
+      from user_key_result_progress
+      group by user_id, cycle_id, cycle_date_start, cadence
+  ),
+
+  user_ranked_cadence as (
+    select
+      *,
+      row_number() over (partition by user_id order by cycle_date_start desc) as rank
+      from user_progress_in_cycle
+  ),
+
   final as (
     select
       user_id,
       cycle_id,
-      avg(progress) as progress,
-      max(date) as date
-      from user_key_result_progress
-      group by user_id, cycle_id
+      cadence,
+      progress,
+      date
+      from user_ranked_cadence
+      where rank = 1
   )
 
 select * from final

@@ -183,3 +183,11 @@ models:
       - name: cycle_id
       - name: progress
       - name: date
+
+  - name: fct__user_cadence_progress
+    columns:
+      - name: user_id
+      - name: cycle_id
+      - name: cadence
+      - name: progress
+      - name: date
