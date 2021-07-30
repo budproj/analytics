@@ -170,3 +170,9 @@ models:
       - name: user_id
       - name: progress
       - name: date
+
+  - name: fct__user_active_progress
+    columns:
+      - name: user_id
+      - name: progress
+      - name: date
