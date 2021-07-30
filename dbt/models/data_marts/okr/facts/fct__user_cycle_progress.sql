@@ -19,7 +19,7 @@ with
     select * from {{ ref('dim__key_result_check_in') }}
   ),
 
-  final as (
+  user_progress_in_cycle as (
     select
       users.id as user_id,
       cycle.id as cycle_id,
@@ -30,7 +30,16 @@ with
       left join key_result_latest_check_in on key_result.id = key_result_latest_check_in.key_result_id
       left join key_result_check_in on key_result_latest_check_in.key_result_check_in_id = key_result_check_in.id
       left join cycle on key_result.cycle_id = cycle.id
-      where cycle.active = true
+  ),
+
+  final as (
+    select
+      user_id,
+      cycle_id,
+      avg(progress) as progress,
+      max(date) as date
+      from user_progress_in_cycle
+      group by user_id, cycle_id
   )
 
 select * from final
