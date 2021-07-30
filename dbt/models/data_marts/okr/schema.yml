@@ -257,3 +257,9 @@ models:
       - name: key_result_id
       - name: progress
       - name: date
+
+  - name: fct__key_result_progress_evolution
+    columns:
+      - name: key_result_id
+      - name: progress
+      - name: date
