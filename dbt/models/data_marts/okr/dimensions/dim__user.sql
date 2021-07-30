@@ -3,8 +3,8 @@ with
     select * from {{ ref('stg_okr__user') }}
   ),
 
-  stg_amplitude__events as (
-    select * from {{ ref('stg_amplitude__events') }}
+  amplitude_event as (
+    select * from {{ ref('dim__amplitude_event') }}
   ),
 
   seed_buddy_users_email as (
@@ -17,10 +17,6 @@ with
 
   users as (
     select * from stg_okr__user
-  ),
-
-  amplitude_event as (
-    select user_id, event_time, event_type from stg_amplitude__events
   ),
 
   latest_pageview_by_user as (

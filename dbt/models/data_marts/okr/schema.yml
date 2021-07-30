@@ -123,6 +123,14 @@ models:
       - name: team_id
       - name: company_id
 
+  - name: dim__amplitude_event
+    columns:
+      - name: id
+      - name: user_id
+      - name: event_time
+      - name: event_type
+      - name: event_properties
+
   - name: fct__user_accesses
     columns:
       - name: user_id
