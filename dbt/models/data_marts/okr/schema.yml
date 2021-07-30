@@ -251,3 +251,9 @@ models:
       - name: cycle_id
       - name: progress
       - name: date
+
+  - name: fct__key_result_progress
+    columns:
+      - name: key_result_id
+      - name: progress
+      - name: date
