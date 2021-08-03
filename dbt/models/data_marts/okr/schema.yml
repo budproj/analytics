@@ -281,3 +281,10 @@ models:
       - name: first_access_amplitude_event_id
       - name: first_key_result_check_in_id
       - name: first_key_result_comment_id
+
+  - name: fct__key_result_is_outdated
+    columns:
+      - name: key_result_id
+      - name: latest_check_in_id
+      - name: is_outdated
+      - name: latest_check_in_date
