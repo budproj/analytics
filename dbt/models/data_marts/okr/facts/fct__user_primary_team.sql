@@ -6,7 +6,7 @@ with
   team_member_with_ranking as (
     select
       *,
-      row_number() over (partition by team_id order by team_id desc) as rank
+      row_number() over (partition by user_id order by team_id desc) as rank
       from fct__team_members
   ),
 

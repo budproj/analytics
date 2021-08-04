@@ -6,7 +6,7 @@ with
   company_member_with_ranking as (
     select
       *,
-      row_number() over (partition by company_id order by company_id desc) as rank
+      row_number() over (partition by user_id order by company_id desc) as rank
       from fct__company_members
   ),
 
