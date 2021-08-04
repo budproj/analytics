@@ -288,3 +288,13 @@ models:
       - name: latest_check_in_id
       - name: is_outdated
       - name: latest_check_in_date
+
+  - name: fct__user_primary_team
+    columns:
+      - name: user_id
+      - name: team_id
+
+  - name: fct__user_primary_company
+    columns:
+      - name: user_id
+      - name: company_id
