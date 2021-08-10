@@ -31,9 +31,6 @@ models:
       - name: linked_in_profile_address
       - name: created_at
       - name: updated_at
-      - name: first_access_time
-      - name: last_access_time
-      - name: activation_delta_days
       - name: type
 
   - name: dim__company
@@ -305,3 +302,18 @@ models:
     columns:
       - name: user_id
       - name: daily_access_average
+
+  - name: fct__user_first_access
+    columns:
+      - name: user_id
+      - name: amplitude_event_id
+
+  - name: fct__user_last_access
+    columns:
+      - name: user_id
+      - name: amplitude_event_id
+
+  - name: fct__user_access_activation_delta
+    columns:
+      - name: user_id
+      - name: delta
