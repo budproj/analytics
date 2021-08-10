@@ -5,14 +5,14 @@ with
 
   final as (
     select
-      id,
-      value,
-      comment,
-      user_id,
-      parent_id,
-      confidence,
-      key_result_id,
-      created_at
+      id::uuid,
+      value::float,
+      comment::text,
+      user_id::uuid,
+      parent_id::uuid,
+      confidence::smallint,
+      key_result_id::uuid,
+      created_at::timestamp
     from src_okr__key_result_check_in
   )
 

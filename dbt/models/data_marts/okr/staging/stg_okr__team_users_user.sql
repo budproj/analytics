@@ -4,7 +4,10 @@ with
   ),
 
   final as (
-    select team_id, user_id from src_okr__team_users_user
+    select
+      team_id::uuid,
+      user_id::uuid
+    from src_okr__team_users_user
   )
 
 select * from final

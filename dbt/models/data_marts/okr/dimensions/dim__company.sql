@@ -17,7 +17,7 @@ with
 
   final as  (
     select
-      {{ dbt_utils.surrogate_key(['id']) }} as id,
+      {{ dbt_utils.surrogate_key(['id']) }}::uuid as id,
       id as team_id,
       name,
       case

@@ -5,13 +5,13 @@ with
 
   final as (
     select
-      id,
-      title,
-      team_id,
-      cycle_id,
-      owner_id,
-      created_at,
-      updated_at
+      id::uuid,
+      title::text,
+      team_id::uuid,
+      cycle_id::uuid,
+      owner_id::uuid,
+      created_at::timestamp,
+      updated_at::timestamp
     from src_okr__objective
   )
 

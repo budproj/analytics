@@ -5,18 +5,18 @@ with
 
   final as (
     select
-      id,
-      goal,
-      type,
-      title,
-      format,
-      team_id,
-      owner_id,
-      description,
-      objective_id,
-      initial_value,
-      created_at,
-      updated_at
+      id::uuid,
+      goal::float,
+      type::varchar(32),
+      title::text,
+      format::varchar(32),
+      team_id::uuid,
+      owner_id::uuid,
+      description::text,
+      objective_id::uuid,
+      initial_value::float,
+      created_at::timestamp,
+      updated_at::timestamp
     from src_okr__key_result
   )
 

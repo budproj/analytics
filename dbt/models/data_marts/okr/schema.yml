@@ -31,7 +31,9 @@ models:
       - name: linked_in_profile_address
       - name: created_at
       - name: updated_at
+      - name: first_access_time
       - name: last_access_time
+      - name: activation_delta_days
       - name: type
 
   - name: dim__company

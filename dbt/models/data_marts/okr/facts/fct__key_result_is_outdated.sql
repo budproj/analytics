@@ -19,7 +19,7 @@ with
         case
           when key_result_check_in.id is null then true
           else
-            to_date(key_result_check_in.created_at, 'YYYYMMDD') <
+            key_result_check_in.created_at <
             {{ get_start_of_week() }}
           end
       ) as is_outdated,
