@@ -298,3 +298,8 @@ models:
     columns:
       - name: user_id
       - name: company_id
+
+  - name: fct__user_daily_access_average
+    columns:
+      - name: user_id
+      - name: daily_access_average
