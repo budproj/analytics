@@ -271,6 +271,7 @@ models:
   - name: fct__key_result_progress_evolution
     columns:
       - name: key_result_id
+      - name: key_result_check_in_id
       - name: progress
       - name: date
 
