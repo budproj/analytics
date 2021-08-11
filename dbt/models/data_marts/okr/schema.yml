@@ -355,3 +355,8 @@ models:
       - name: key_result_check_in_id
       - name: day
       - name: progress
+
+  - name: fct__key_result_amount_of_check_ins
+    columns:
+      - name: key_result_id
+      - name: amount_of_check_ins
