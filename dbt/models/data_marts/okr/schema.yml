@@ -348,3 +348,10 @@ models:
     columns:
       - name: user_id
       - name: owned_key_results
+
+  - name: fct__key_result_daily_average_progress
+    columns:
+      - name: key_result_id
+      - name: key_result_check_in_id
+      - name: day
+      - name: progress
