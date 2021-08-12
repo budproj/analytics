@@ -2,16 +2,20 @@ import { NestFactory } from '@nestjs/core'
 import { MicroserviceOptions } from '@nestjs/microservices'
 
 import { AppModule } from './app.module'
-import { grpcClientOptions } from './grpc-client.options'
+import { GRPCConfigProvider } from './config/grpc/grpc.provider'
+import { GRPCModule } from './grpc/grpc.module'
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+  const grpcConfigContext = await NestFactory.createApplicationContext(GRPCModule)
+  const grpcConfig = grpcConfigContext.get(GRPCConfigProvider)
+
+  const grpc = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
-    grpcClientOptions,
+    grpcConfig.connection,
   )
 
-  app.listen(() => {
-    console.log('ok')
+  grpc.listen(() => {
+    console.log(`GRPC server listening on port ${grpcConfig.port}`)
   })
 }
 

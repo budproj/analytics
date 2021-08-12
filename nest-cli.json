@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
-    "assets": ["**/*.proto"]
+    "assets": [
+      {
+        "include": "**/*.proto",
+        "outDir": "dist/src"
+      }
+    ]
   }
 }
