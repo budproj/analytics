@@ -12,8 +12,9 @@ with
       users.id as user_id,
       key_result_check_in.id as key_result_check_in_id,
       key_result_check_in.created_at as created_at
-      from users
-      left join key_result_check_in on users.id = key_result_check_in.user_id
+      from key_result_check_in
+      left join users on users.id = key_result_check_in.user_id
+      group by users.id, key_result_check_in.id, key_result_check_in.created_at
   )
 
 select * from final

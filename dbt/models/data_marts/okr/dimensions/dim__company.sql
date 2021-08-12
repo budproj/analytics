@@ -17,7 +17,9 @@ with
 
   final as  (
     select
-      id,
+      {{ dbt_utils.surrogate_key(['id']) }}::uuid as id,
+      id as team_id,
+      name,
       case
         when (
           select count(*) from seed_buddy_companies_name where name = companies.name

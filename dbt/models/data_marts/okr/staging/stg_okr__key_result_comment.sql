@@ -5,12 +5,12 @@ with
 
   final as (
     select
-      id,
-      text,
-      user_id,
-      key_result_id,
-      created_at,
-      updated_at
+      id::uuid,
+      text::text,
+      user_id::uuid,
+      key_result_id::uuid,
+      created_at::timestamp,
+      updated_at::timestamp
     from src_okr__key_result_comment
   )
 

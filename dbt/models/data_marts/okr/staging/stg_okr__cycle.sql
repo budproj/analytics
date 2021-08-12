@@ -5,16 +5,16 @@ with
 
   final as (
     select
-      id,
-      active,
-      period,
-      cadence,
-      team_id,
-      date_start,
-      date_end,
-      parent_id,
-      created_at,
-      updated_at
+      id::uuid,
+      active::boolean,
+      period::varchar(32),
+      cadence::varchar(32),
+      team_id::uuid,
+      date_start::timestamp,
+      date_end::timestamp,
+      parent_id::uuid,
+      created_at::timestamp,
+      updated_at::timestamp
     from src_okr__cycle
   )
 

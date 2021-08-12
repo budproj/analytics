@@ -5,19 +5,19 @@ with
 
   final as (
     select
-      id,
+      id::uuid,
       role,
-      about,
-      email,
-      gender,
-      picture,
-      nickname,
-      authz_sub,
-      first_name,
-      last_name,
-      linked_in_profile_address,
-      created_at,
-      updated_at
+      about::text,
+      email::varchar(256),
+      gender::varchar(32),
+      picture::text,
+      nickname::varchar(256),
+      authz_sub::char(30),
+      first_name::varchar(256),
+      last_name::varchar(256),
+      linked_in_profile_address::text,
+      created_at::timestamp,
+      updated_at::timestamp
     from src_okr__user
   )
 
