@@ -11,3 +11,6 @@ logs
 
 # Node
 node_modules
+
+# NestJS
+dist
