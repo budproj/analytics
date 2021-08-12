@@ -4,13 +4,15 @@
   <br>
 </p>
 <p align="center">
-Infrastructure and applications to enable to evaluation of data 
+Infrastructure and applications to enable the evaluation of our data 
 </p>
 
 # Template Base
 
 * [Why](#why)
 * [Quickstart](#quickstart)
+  * [Install](#install)
+  * [Setup](#setup)
 * [Usage](#usage)
 * [Contributing](#contributing)
 * [License](#license)

@@ -5,3 +5,9 @@ dbt/logs
 
 # Logs
 logs
+
+# Environment
+.env.local
+
+# Node
+node_modules
