@@ -1,11 +1,11 @@
-import { Controller } from "@nestjs/common";
-import { GrpcMethod } from "@nestjs/microservices";
+import { Controller } from '@nestjs/common'
+import { GrpcMethod } from '@nestjs/microservices'
 
-@Controller("analytics")
+@Controller('analytics')
 export class AnalyticsController {
-  @GrpcMethod("AnalyticsService")
+  @GrpcMethod('AnalyticsService')
   findOne(data: any): any {
-    console.log(data);
-    return { id: 1, name: "John" };
+    console.log(data)
+    return { id: 1, name: 'John' }
   }
 }
