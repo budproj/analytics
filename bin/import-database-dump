@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+
+# DEPENDENCIES
+# -------------------------------------------------------------------------------------------------
+# To run this script, you must have the following tools installed:
+# - bash 4
+# - psql 11
+
+# Global variables
+# -------------------------------------------------------------------------------------------------
+
+DB_USER="${POSTGRES_USER:-analytics}"
+DB_PASSWORD="${POSTGRES_PASSWORD:-changeme}"
+DB_NAME="${POSTGRES_DB:-analytics}"
+ROOT_DIR=$(git rev-parse --show-toplevel)
+
+# Entrypoint
+# -------------------------------------------------------------------------------------------------
+
+function main {
+  validate_requirements
+  authenticate_pg_client
+  clear_database
+  create_database
+  load_dump
+
+  echo
+}
+
+# Validate requirements
+# -------------------------------------------------------------------------------------------------
+
+function validate_requirements {
+  validate_bash_dependency
+  validate_psql_dependency
+}
+
+function validate_bash_dependency {
+  major_version="$(bash --version | head -1 | cut -d ' ' -f 4 | cut -d '.' -f 1)"
+  min_major_version="4"
+
+  if [ "${major_version}" -lt "${min_major_version}" ]; then
+    throw_error "Your bash major version must be ${min_major_version} or greater"
+  fi
+}
+
+function validate_psql_dependency {
+  major_version="$(psql --version | head -1 | cut -d ' ' -f 3 | cut -d '.' -f 1)"
+  min_major_version="11"
+
+  if [ "${major_version}" -lt "${min_major_version}" ]; then
+    throw_error "Your psql major version must be ${min_major_version} or greater"
+  fi
+}
+
+# Authenticate Postgres client
+# -------------------------------------------------------------------------------------------------
+
+function authenticate_pg_client {
+  export PGPASSWORD=$DB_PASSWORD
+}
+
+# Clear database
+# -------------------------------------------------------------------------------------------------
+
+function clear_database {
+  log "Clearing" "Clear database"
+
+  psql -h localhost -U ${DB_USER} postgres -c "DROP DATABASE ${DB_NAME}"
+}
+
+# Create database
+# -------------------------------------------------------------------------------------------------
+
+function create_database {
+  log "Creating" "Create database"
+
+  psql -h localhost -U ${DB_USER} postgres -c "CREATE DATABASE ${DB_NAME}"
+}
+
+# Load seed data
+# -------------------------------------------------------------------------------------------------
+
+function load_dump {
+  log "Loading" "Load dump"
+
+  psql -h localhost -U ${DB_USER} $DB_NAME < $ROOT_DIR/src/infrastructure/database/dump.sql
+}
+
+# Helpers
+# -------------------------------------------------------------------------------------------------
+
+function log {
+  message=$1
+  category=${2:-Waiting}
+
+  bold=$(tput bold)
+  reset=$(tput sgr0)
+  cyan=$(tput setaf 6)
+
+  echo
+  echo "${bold}${cyan}➤ ${category}:${reset} ${message}"
+}
+
+function throw_error {
+  message=$1
+
+  bold=$(tput bold)
+  reset=$(tput sgr0)
+  red=$(tput setaf 1)
+
+  echo "${bold}${red}Error:${reset}"
+  echo "${red}  ${message}${reset}"
+  exit 1
+}
+
+# Execute
+# -------------------------------------------------------------------------------------------------
+
+main
