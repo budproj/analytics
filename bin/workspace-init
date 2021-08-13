@@ -59,7 +59,7 @@ function install_dependencies {
   install_pg_client
   set_node_version
   install_node_dependencies
-  import_database_dump
+  sync_database
 }
 
 function install_pg_client {
@@ -82,8 +82,8 @@ function install_node_dependencies {
   npm install
 }
 
-function import_database_dump {
-  source "${ROOT_DIR}/bin/import-database-dump"
+function sync_database {
+  source "${ROOT_DIR}/bin/sync-database"
 }
 
 # Helpers

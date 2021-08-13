@@ -22,7 +22,8 @@ function main {
   authenticate_pg_client
   clear_database
   create_database
-  load_dump
+  sync_schema
+  sync_data
 
   echo
 }
@@ -78,13 +79,19 @@ function create_database {
   psql -h localhost -U ${DB_USER} postgres -c "CREATE DATABASE ${DB_NAME}"
 }
 
-# Load seed data
+# Sync
 # -------------------------------------------------------------------------------------------------
 
-function load_dump {
-  log "Loading" "Load dump"
+function sync_schema {
+  log "Syncing" "Schema"
 
-  psql -h localhost -U ${DB_USER} $DB_NAME < $ROOT_DIR/src/infrastructure/database/dump.sql
+  psql -h localhost -U ${DB_USER} $DB_NAME < $ROOT_DIR/src/infrastructure/database/schema-2021-08-13.sql
+}
+
+function sync_data {
+  log "Syncing" "Data"
+
+  psql -h localhost -U ${DB_USER} $DB_NAME < $ROOT_DIR/src/infrastructure/database/seed.sql
 }
 
 # Helpers
