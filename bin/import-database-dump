@@ -9,7 +9,7 @@
 # Global variables
 # -------------------------------------------------------------------------------------------------
 
-DB_USER="${POSTGRES_USER:-analytics}"
+DB_USER="${POSTGRES_USER:-dev}"
 DB_PASSWORD="${POSTGRES_PASSWORD:-changeme}"
 DB_NAME="${POSTGRES_DB:-analytics}"
 ROOT_DIR=$(git rev-parse --show-toplevel)
