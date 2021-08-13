@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common'
-import { ConfigModule } from '@nestjs/config'
 
+import { GRPCConfigModule } from './config/grpc/grpc.module'
+import { LoggingConfigModule } from './config/logging/logging.module'
 import { GRPCModule } from './grpc/grpc.module'
 
 @Module({
-  imports: [GRPCModule, ConfigModule],
+  imports: [GRPCModule, GRPCConfigModule, LoggingConfigModule],
 })
 export class AppModule {}

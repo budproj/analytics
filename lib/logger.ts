@@ -1,7 +1,7 @@
 import { WinstonModule, utilities } from 'nest-winston'
 import { transports, format } from 'winston'
 
-enum LogLevel {
+export enum LogLevel {
   DEBUG = 'debug',
   INFO = 'info',
   WARN = 'warn',
