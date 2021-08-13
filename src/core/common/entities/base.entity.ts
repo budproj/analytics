@@ -66,7 +66,7 @@ export abstract class Entity<T> {
   }
 
   public toObject(): unknown {
-    const propertiesCopy = unmarshalProperties(this.properties)
+    const propertiesCopy = unmarshalProperties<T>(this.properties)
 
     const result = {
       id: this._id.value,

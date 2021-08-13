@@ -21,7 +21,7 @@ function convertToRaw(item: any): any {
   return item
 }
 
-export function unmarshalProperties(properties: any): any {
+export function unmarshalProperties<T>(properties: any): T {
   const propertiesCopy = { ...properties }
 
   // eslint-disable-next-line guard-for-in

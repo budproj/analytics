@@ -35,7 +35,8 @@
     "orm:run": "ts-node -r tsconfig-paths/register ./node_modules/.bin/typeorm --config src/config/orm/orm-cli.config",
     "orm:migrate": "npm run orm migration:run",
     "orm:migration-revert": "npm run orm migration:revert",
-    "orm:migration-format": "prettier --write 'src/infrastructure/orm/migrations/*.ts'"
+    "orm:migration-format": "prettier --write 'src/infrastructure/orm/migrations/*.ts'",
+    "orm:migration-generate": "npm run orm migration:generate -- -n"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.3.7",

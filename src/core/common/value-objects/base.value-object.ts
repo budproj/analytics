@@ -31,7 +31,7 @@ export abstract class ValueObject<T> {
       return this.properties.value
     }
 
-    const propertiesCopy = unmarshalProperties(this.properties)
+    const propertiesCopy = unmarshalProperties<T>(this.properties)
 
     return Object.freeze(propertiesCopy)
   }

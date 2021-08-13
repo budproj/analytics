@@ -4,7 +4,7 @@ import { ORMConfigInterface } from './orm.interface'
 
 export const ormConfig = registerAs('orm', (): ORMConfigInterface => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const cliConfig = require('./typeorm-cli.config')
+  const cliConfig = require('./orm-cli.config')
 
   return {
     type: cliConfig.type,
