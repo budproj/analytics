@@ -18,9 +18,12 @@
     "node": ">=16.6.2"
   },
   "scripts": {
-    "prebuild": "rimraf dist",
+    "prepare": "husky install",
+    "prebuild": "npm run clean",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "compile": "tsc",
+    "clean": "rimraf -rf dist",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -28,7 +31,11 @@
     "lint": "eslint '{src,apps,libs,test}/**/*.ts'",
     "lint:fix": "npm run lint -- --fix",
     "lint:staged": "lint-staged",
-    "prepare": "husky install"
+    "orm": "run-s clean compile && npm run orm:run --",
+    "orm:run": "ts-node -r tsconfig-paths/register ./node_modules/.bin/typeorm --config src/config/orm/orm-cli.config",
+    "orm:migrate": "npm run orm migration:run",
+    "orm:migration-revert": "npm run orm migration:revert",
+    "orm:migration-format": "prettier --write 'src/infrastructure/orm/migrations/*.ts'"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.3.7",
@@ -42,6 +49,8 @@
     "class-transformer": "0.4.0",
     "class-validator": "0.13.1",
     "nest-winston": "^1.4.0",
+    "npm-run-all": "^4.1.5",
+    "pg": "^8.7.1",
     "reflect-metadata": "0.1.13",
     "rxjs": "7.3.0",
     "typeorm-naming-strategies": "^2.0.0",

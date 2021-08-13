@@ -90,7 +90,7 @@ function sync_database {
 function migrate_database {
   log "Running migrations" "Database"
 
-  npm run migration:run
+  npm run orm:migrate
 }
 
 # Helpers
