@@ -24,9 +24,9 @@ async function bootstrap() {
   )
 
   grpc.useLogger(logger)
-  grpc.listen(() => {
-    logger.log(`GRPC server listening on port ${grpcConfig.port}`)
-  })
+
+  await grpc.listen()
+  logger.log(`GRPC server listening on port ${grpcConfig.port}`)
 }
 
 void bootstrap()
