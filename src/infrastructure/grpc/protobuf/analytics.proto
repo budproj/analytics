@@ -1,0 +1,20 @@
+syntax = "proto3";
+package analytics;
+
+service AnalyticsService {
+  rpc GetKeyResultProgressHistory (KeyResultProgressHistoryRequest) returns (ProgressHistoryResponse);
+}
+
+message KeyResultProgressHistoryRequest {
+  string keyResultID = 1;
+}
+
+message ProgressHistoryResponse {
+  repeated ProgressRecord history = 1;
+}
+
+message ProgressRecord {
+  string id = 1;
+  float progress = 2;
+  int64 timestamp = 3;
+}

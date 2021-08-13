@@ -12,7 +12,7 @@ export const grpcConfig = registerAs(
     url: `localhost:${Number.parseInt(process.env.GRPC_PORT, 10)}`,
     package: process.env.GRPC_PACKAGES.split(','),
     protoPath: process.env.GRPC_PACKAGES.split(',').map((packageName) =>
-      join(__dirname, `../../infrastructure/grpc/${packageName}.proto`),
+      join(__dirname, `../../infrastructure/grpc/protobuf/${packageName}.proto`),
     ),
   }),
 )
