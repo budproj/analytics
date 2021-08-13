@@ -1,7 +1,8 @@
+import { ORMEntity } from '@infrastructure/orm/entities/base.entity'
+
 import { Entity } from '../entities/base.entity'
+import { EntityRepository } from '../repositories/base.repository'
 
-import { EntityRepository } from './repository.interface'
-
-export interface EntityService<T extends Entity<unknown>> {
-  repository: EntityRepository<T>
+export interface EntityService<E extends Entity<unknown>, O extends ORMEntity> {
+  repository: EntityRepository<E, O>
 }

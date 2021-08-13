@@ -17,6 +17,6 @@ export class PersistenceAdapter {
     const Entity = this.entityHashmap[entityName]
 
     // eslint-disable-next-line unicorn/no-array-callback-reference
-    return this.manager.find<T>(Entity)
+    return this.manager.find<T>(Entity, indexes)
   }
 }

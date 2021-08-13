@@ -2,5 +2,5 @@ import { EntityProperties } from 'src/core/common/interfaces/entity-properties.i
 import { ID } from 'src/core/common/value-objects/id.value-object'
 
 export interface KeyResultProgressRecordProperties extends EntityProperties {
-  keyResultID: ID
+  keyResultId: ID
 }

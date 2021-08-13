@@ -8,9 +8,6 @@ export class KeyResultService {
     new KeyResultProgressRecordService()
 
   public async getProgressHistoryForKeyResultID(id: ID): Promise<KeyResultProgressRecord[]> {
-    const keyResultProgressRecords = this.progressRecord.repository.getAllFromKeyResultID(id)
-    console.log(keyResultProgressRecords, id)
-
-    return []
+    return this.progressRecord.repository.getAllFromKeyResultID(id)
   }
 }

@@ -8,7 +8,9 @@ export class GetKeyResultProgressHistory extends PrimaryPort<ProgressHistoryResp
   public async execute(request: KeyResultProgressHistoryRequest): Promise<ProgressHistoryResponse> {
     const keyResultID = new ID(request.keyResultID)
     const history = await this.core.okr.keyResult.getProgressHistoryForKeyResultID(keyResultID)
-    console.log(history)
+
+    const unmarshaledHistory = history.map((record) => record.toObject())
+    console.log(unmarshaledHistory)
 
     return []
   }
