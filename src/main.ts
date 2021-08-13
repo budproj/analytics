@@ -1,13 +1,13 @@
 import { NestFactory } from '@nestjs/core'
 import { MicroserviceOptions } from '@nestjs/microservices'
 
+import { GRPCConfigModule } from '@config/grpc/grpc.module'
+import { GRPCConfigProvider } from '@config/grpc/grpc.provider'
+import { LoggingConfigModule } from '@config/logging/logging.module'
+import { LoggingConfigProvider } from '@config/logging/logging.provider'
 import { buildLogger } from '@lib/logger'
 
 import { AppModule } from './app.module'
-import { GRPCConfigModule } from './config/grpc/grpc.module'
-import { GRPCConfigProvider } from './config/grpc/grpc.provider'
-import { LoggingConfigModule } from './config/logging/logging.module'
-import { LoggingConfigProvider } from './config/logging/logging.provider'
 
 async function bootstrap() {
   const grpcConfigContext = await NestFactory.createApplicationContext(GRPCConfigModule)

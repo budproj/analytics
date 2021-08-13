@@ -13,7 +13,10 @@
     "incremental": true,
     "skipLibCheck": true,
     "paths": {
-      "@lib/*": ["lib/*"]
+      "@lib/*": ["lib/*"],
+      "@analytics/*": ["src/analytics/*"],
+      "@config/*": ["src/config/*"],
+      "@infrastructure/*": ["src/infrastructure/*"]
     }
   },
   "include": ["*.ts", "src/**/*.ts", "lib/**/*.ts"]

@@ -91,7 +91,7 @@ function sync_schema {
 function sync_data {
   log "Syncing" "Data"
 
-  psql -h localhost -U ${DB_USER} $DB_NAME < $ROOT_DIR/src/infrastructure/database/seed.sql
+  psql -h localhost -U ${DB_USER} $DB_NAME < $ROOT_DIR/src/infrastructure/database/seed-2021-08-13.sql
 }
 
 # Helpers

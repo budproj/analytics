@@ -60,6 +60,7 @@ function install_dependencies {
   set_node_version
   install_node_dependencies
   sync_database
+  migrate_database
 }
 
 function install_pg_client {
@@ -84,6 +85,12 @@ function install_node_dependencies {
 
 function sync_database {
   source "${ROOT_DIR}/bin/sync-database"
+}
+
+function migrate_database {
+  log "Running migrations" "Database"
+
+  npm run migration:run
 }
 
 # Helpers
