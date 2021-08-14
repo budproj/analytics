@@ -6,7 +6,7 @@ service AnalyticsService {
 }
 
 message KeyResultProgressHistoryRequest {
-  string keyResultID = 1;
+  string keyResultId = 1;
 }
 
 message ProgressHistoryResponse {

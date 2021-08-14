@@ -3,12 +3,15 @@ import { EntityRepository } from 'src/core/common/repositories/base.repository'
 import { ID } from 'src/core/common/value-objects/id.value-object'
 import { SecondaryPorts } from 'src/core/ports/secondary-ports.service'
 
+import { Progress } from '../value-objects/progress.value-object'
+
 import { KeyResultProgressRecord } from './progress-record.entity'
+import { KeyResultProgressRecordObject } from './progress-record.object'
 import { KeyResultProgressRecordProperties } from './progress-record.properties'
 
 export class KeyResultProgressRecordRepository extends EntityRepository<
-  KeyResultProgressRecord,
-  KeyResultProgressRecordORMEntity
+  KeyResultProgressRecordObject,
+  KeyResultProgressRecord
 > {
   private readonly ports: SecondaryPorts = new SecondaryPorts()
 
@@ -35,6 +38,7 @@ export class KeyResultProgressRecordRepository extends EntityRepository<
     return {
       ...this.marshalGenericProperties(properties),
       keyResultId: new ID(properties.keyResultId),
+      progress: new Progress(properties.progress),
     }
   }
 }

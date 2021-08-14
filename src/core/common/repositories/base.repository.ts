@@ -1,11 +1,10 @@
-import { ORMEntity } from '@infrastructure/orm/entities/base.entity'
-
 import { Entity } from '../entities/base.entity'
+import { EntityObject } from '../interfaces/entity-object.interface'
 import { EntityProperties } from '../interfaces/entity-properties.interface'
 import { DateVO } from '../value-objects/date.value-object'
 import { ID } from '../value-objects/id.value-object'
 
-export abstract class EntityRepository<E extends Entity<unknown>, O extends ORMEntity> {
+export abstract class EntityRepository<O extends EntityObject, E extends Entity<any, O>> {
   protected marshalGenericProperties(properties: O): EntityProperties {
     return {
       id: new ID(properties.id),

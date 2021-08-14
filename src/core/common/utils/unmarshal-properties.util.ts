@@ -1,11 +1,11 @@
 import { Entity } from '../entities/base.entity'
 import { ValueObject } from '../value-objects/base.value-object'
 
-function isEntity(object: unknown): object is Entity<unknown> {
+function isEntity(object: unknown): object is Entity<any, any> {
   return (
     Object.prototype.hasOwnProperty.call(object, 'toObject') &&
     Object.prototype.hasOwnProperty.call(object, 'id') &&
-    ValueObject.isValueObject((object as Entity<unknown>).id)
+    ValueObject.isValueObject((object as Entity<any, any>).id)
   )
 }
 

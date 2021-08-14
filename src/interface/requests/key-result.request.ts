@@ -1,3 +1,3 @@
 export interface KeyResultProgressHistoryRequest {
-  keyResultID: string
+  keyResultId: string
 }

@@ -1,7 +1,9 @@
-export type ProgressHistoryResponse = ProgressRecord[]
+export type ProgressHistoryResponse = {
+  history: ProgressRecord[]
+}
 
-interface ProgressRecord {
+export interface ProgressRecord {
   id: string
   progress: number
-  date: Date
+  timestamp: number
 }
