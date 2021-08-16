@@ -1,4 +1,4 @@
-import { ObjectLiteral } from '../types/object-literal.type'
+import { ObjectLiteral } from '@core/common/types/object-literal.type'
 
 export interface SerializedException {
   name: string

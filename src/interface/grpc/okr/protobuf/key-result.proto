@@ -1,11 +1,11 @@
 syntax = "proto3";
-package analytics;
+package keyResult;
 
-service AnalyticsService {
-  rpc GetKeyResultProgressHistory (KeyResultProgressHistoryRequest) returns (ProgressHistoryResponse);
+service KeyResultService {
+  rpc GetProgressHistory (ProgressHistoryRequest) returns (ProgressHistoryResponse);
 }
 
-message KeyResultProgressHistoryRequest {
+message ProgressHistoryRequest {
   string keyResultId = 1;
 }
 
