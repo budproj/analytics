@@ -22,8 +22,7 @@ function main {
   authenticate_pg_client
   clear_database
   create_database
-  sync_schema
-  sync_data
+  load_latest_dev_dump
 
   echo
 }
@@ -79,19 +78,13 @@ function create_database {
   psql -h localhost -U ${DB_USER} postgres -c "CREATE DATABASE ${DB_NAME}"
 }
 
-# Sync
+# Dump
 # -------------------------------------------------------------------------------------------------
 
-function sync_schema {
-  log "Syncing" "Schema"
+function load_latest_dev_dump {
+  log "Dump" "Loading latest"
 
-  psql -h localhost -U ${DB_USER} $DB_NAME < $ROOT_DIR/src/infrastructure/database/schema-2021-08-13.sql
-}
-
-function sync_data {
-  log "Syncing" "Data"
-
-  psql -h localhost -U ${DB_USER} $DB_NAME < $ROOT_DIR/src/infrastructure/database/seed-2021-08-13.sql
+  psql -h localhost -U ${DB_USER} $DB_NAME < $ROOT_DIR/src/infrastructure/database/dump-2021-08-16.sql
 }
 
 # Helpers

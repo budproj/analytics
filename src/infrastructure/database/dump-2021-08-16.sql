@@ -17,17 +17,17 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: public; Type: SCHEMA; Schema: -; Owner: -
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
 --
 
-CREATE SCHEMA public;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 
 
 --
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: -
 --
 
-COMMENT ON SCHEMA public IS 'standard public schema';
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
 
 
 SET default_tablespace = '';
@@ -95,6 +95,39 @@ ALTER SEQUENCE public.migrations_id_seq OWNED BY public.migrations.id;
 --
 
 ALTER TABLE ONLY public.migrations ALTER COLUMN id SET DEFAULT nextval('public.migrations_id_seq'::regclass);
+
+
+--
+-- Data for Name: key_result; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.key_result VALUES ('71425c53-39f2-41c8-b896-cd8907d7ed12', '2021-08-16 19:19:18.79546', '2021-08-16 19:19:18.79546');
+INSERT INTO public.key_result VALUES ('1324d1e1-67fc-410c-b221-37fb42f969ed', '2021-08-16 19:19:19.175904', '2021-08-16 19:19:19.175904');
+INSERT INTO public.key_result VALUES ('bbacf2fc-f202-49b2-b31d-0df79c59084d', '2021-08-16 19:19:19.475536', '2021-08-16 19:19:19.475536');
+
+
+--
+-- Data for Name: key_result_progress_record; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.key_result_progress_record VALUES ('20b0e20c-d0ea-45f1-a778-68011bc434d9', '2021-08-16 19:19:30.383998', '2021-08-16 19:19:30.383998', 20, '2021-08-16 19:19:30.383998', '71425c53-39f2-41c8-b896-cd8907d7ed12');
+INSERT INTO public.key_result_progress_record VALUES ('bc1dd255-62ef-47ee-bd23-3d80259afc82', '2021-08-16 19:19:32.685749', '2021-08-16 19:19:32.685749', 50, '2021-08-16 19:19:32.685749', '71425c53-39f2-41c8-b896-cd8907d7ed12');
+INSERT INTO public.key_result_progress_record VALUES ('9ed5faeb-7ff6-4dea-ac2f-36b8bdc7723b', '2021-08-16 19:19:33.395245', '2021-08-16 19:19:33.395245', 0, '2021-08-16 19:19:33.395245', '71425c53-39f2-41c8-b896-cd8907d7ed12');
+INSERT INTO public.key_result_progress_record VALUES ('83bd48e6-0563-4db3-ad22-941cd4e7619c', '2021-08-16 19:19:40.896487', '2021-08-16 19:19:40.896487', 20, '2021-08-16 19:19:40.896487', '1324d1e1-67fc-410c-b221-37fb42f969ed');
+
+
+--
+-- Data for Name: migrations; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.migrations VALUES (1, 1628897077262, 'AddsKeyResultAndKeyResultRecord1628897077262');
+
+
+--
+-- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.migrations_id_seq', 1, true);
 
 
 --
