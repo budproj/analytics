@@ -1,7 +1,7 @@
-import { SerializedException } from '../interfaces/serialized-exception.interface'
 import { ObjectLiteral } from '../types/object-literal.type'
 
 import { ExceptionName } from './exception-name.enum'
+import { SerializedException } from './interfaces/serialized-exception.interface'
 
 export abstract class Exception extends Error {
   public abstract name: ExceptionName

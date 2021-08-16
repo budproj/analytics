@@ -1,5 +1,5 @@
-import { Entity } from '../entities/base.entity'
-import { ValueObject } from '../value-objects/base.value-object'
+import { Entity } from '../domain/base.entity'
+import { ValueObject } from '../domain/value-objects/base.value-object'
 
 function isEntity(object: unknown): object is Entity<any, any> {
   return (

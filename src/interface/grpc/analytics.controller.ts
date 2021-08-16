@@ -1,11 +1,9 @@
 import { Controller } from '@nestjs/common'
 import { GrpcMethod } from '@nestjs/microservices'
-
 import { KeyResultProgressRecordObject } from 'src/core/modules/okr/key-result/progress-record/progress-record.object'
-import { PrimaryPorts } from 'src/core/ports/primary-ports.service'
 
-import { KeyResultProgressHistoryRequest } from '../requests/key-result.request'
-import { ProgressHistoryResponse, ProgressRecord } from '../responses/key-result.response'
+import { KeyResultProgressHistoryRequest } from './requests/key-result.request'
+import { ProgressHistoryResponse, ProgressRecord } from './responses/key-result.response'
 
 @Controller('analytics')
 export class AnalyticsController {

@@ -13,10 +13,12 @@
     "incremental": true,
     "skipLibCheck": true,
     "paths": {
-      "@lib/*": ["lib/*"],
-      "@analytics/*": ["src/analytics/*"],
+      "@adapters/*": ["src/adapters/*"],
       "@config/*": ["src/config/*"],
-      "@infrastructure/*": ["src/infrastructure/*"]
+      "@core/*": ["src/core/*"],
+      "@infrastructure/*": ["src/infrastructure/*"],
+      "@modules/*": ["src/core/modules/*"],
+      "@lib/*": ["lib/*"]
     }
   },
   "include": ["*.ts", "src/**/*.ts", "lib/**/*.ts"]

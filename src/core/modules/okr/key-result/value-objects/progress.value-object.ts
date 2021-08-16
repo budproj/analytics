@@ -1,6 +1,6 @@
-import { ArgumentInvalidException } from 'src/core/common/exceptions/argument-invalid.exception'
-import { DomainPrimitive } from 'src/core/common/interfaces/domain-primitive.interface'
-import { ValueObject } from 'src/core/common/value-objects/base.value-object'
+import { DomainPrimitive } from '@core/common/domain/interfaces/domain-primitive.interface'
+import { ValueObject } from '@core/common/domain/value-objects/base.value-object'
+import { ArgumentInvalidException } from '@core/common/exceptions/argument-invalid.exception'
 
 export class Progress extends ValueObject<number> {
   constructor(value: number) {
