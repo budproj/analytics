@@ -10,11 +10,13 @@ message ProgressHistoryRequest {
 }
 
 message ProgressHistoryResponse {
-  repeated ProgressRecord history = 1;
+  repeated ProgressRecord data = 1;
 }
 
 message ProgressRecord {
   string id = 1;
-  float progress = 2;
-  int64 timestamp = 3;
+  string keyResultId = 2;
+  float progress = 3;
+  string createdAt = 4;
+  string updatedAt = 5;
 }

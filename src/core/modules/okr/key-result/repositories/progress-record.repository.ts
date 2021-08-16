@@ -1,6 +1,6 @@
+import { PersistenceAdapter } from '@adapters/persistence.adapter'
 import { EntityRepository } from '@core/common/domain/base.repository'
 import { ID } from '@core/common/domain/value-objects/id.value-object'
-import { PersistencePorts } from '@core/common/ports/persistence.ports'
 
 import { KeyResultProgressRecord } from '../entities/progress-record.entity'
 import { KeyResultProgressRecordPrimitives } from '../primitives/progress-record.primitives'
@@ -9,12 +9,12 @@ import { Progress } from '../value-objects/progress.value-object'
 
 export class KeyResultProgressRecordRepository extends EntityRepository<
   KeyResultProgressRecordPrimitives,
+  KeyResultProgressRecordProperties,
   KeyResultProgressRecord
 > {
-  private readonly persistence: PersistencePorts<
-    KeyResultProgressRecordProperties,
-    KeyResultProgressRecordPrimitives
-  > = new PersistencePorts(KeyResultProgressRecord.name)
+  public constructor(persistenceAdapter: PersistenceAdapter) {
+    super(KeyResultProgressRecord.name, persistenceAdapter)
+  }
 
   public async getMany(
     indexes: Partial<KeyResultProgressRecordProperties>,

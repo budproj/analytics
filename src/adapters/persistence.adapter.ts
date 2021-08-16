@@ -1,3 +1,3 @@
-export interface PersistenceAdapter<T> {
-  getManyFromNamedEntity(indexes: Partial<T>, entityName: string): Promise<T[]>
+export interface PersistenceAdapter {
+  getManyFromNamedEntity<T>(indexes: Partial<T>, entityName: string): Promise<T[]>
 }

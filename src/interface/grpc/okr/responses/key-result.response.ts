@@ -1,9 +1,5 @@
-export type ProgressHistoryResponse = {
-  history: ProgressRecord[]
-}
+import { KeyResultProgressRecordPrimitives } from '@core/modules/okr/key-result/primitives/progress-record.primitives'
 
-export interface ProgressRecord {
-  id: string
-  progress: number
-  timestamp: number
-}
+import { Response } from '../../interfaces/response.interface'
+
+export interface ProgressHistoryResponse extends Response<KeyResultProgressRecordPrimitives[]> {}
