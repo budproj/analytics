@@ -18,7 +18,7 @@ export abstract class ValueObject<T> {
     return object instanceof ValueObject
   }
 
-  public equals(vo?: ValueObject<T>): boolean {
+  public isEqual(vo?: ValueObject<T>): boolean {
     if (vo === null || vo === undefined) {
       return false
     }

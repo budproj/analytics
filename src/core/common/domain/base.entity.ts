@@ -41,7 +41,7 @@ export abstract class Entity<P extends EntityProperties, O extends EntityPrimiti
     return entity instanceof Entity
   }
 
-  public equals(object?: Entity<P, O>): boolean {
+  public isEqual(object?: Entity<P, O>): boolean {
     if (object === null || object === undefined) {
       return false
     }
@@ -54,7 +54,11 @@ export abstract class Entity<P extends EntityProperties, O extends EntityPrimiti
       return false
     }
 
-    return this.id ? this.id.equals(object.id) : false
+    return this.id ? this.id.isEqual(object.id) : false
+  }
+
+  public isGreaterThan(other: Entity<P, O>, comparissonKey: keyof P = 'createdAt'): boolean {
+    return this.properties[comparissonKey] < other.properties[comparissonKey]
   }
 
   public getPropsCopy(): P & EntityProperties {
