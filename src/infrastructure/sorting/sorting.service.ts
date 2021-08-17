@@ -1,17 +1,18 @@
 import { SortingAdapter } from '@adapters/sorting.adapter'
 import { Entity } from '@core/common/domain/base.entity'
-import { EntityProperties } from '@core/common/domain/interfaces/entity-properties.interface'
 
-export class SortingService<T extends EntityProperties> implements SortingAdapter<T> {
-  public insertionSort(entities: Array<Entity<T, any>>): Array<Entity<T, any>> {
+export class SortingService implements SortingAdapter {
+  public insertionSort<E extends Entity<any, any>>(entities: E[]): E[] {
     for (let outerIndex = 1; outerIndex < entities.length; outerIndex++) {
-      let innerIndex = outerIndex - 1
       const key = entities[outerIndex]
 
+      let innerIndex = outerIndex - 1
       while (innerIndex >= 0 && entities[innerIndex].isGreaterThan(key)) {
         entities[innerIndex + 1] = entities[innerIndex]
         innerIndex--
       }
+
+      entities[innerIndex + 1] = key
     }
 
     return entities
