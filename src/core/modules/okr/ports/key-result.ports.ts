@@ -1,3 +1,5 @@
+import { DateWindowCategory } from '@core/common/domain/enums/date-window-category.enum'
+import { DateWindow } from '@core/common/domain/value-objects/date-window.value-object'
 import { ID } from '@core/common/domain/value-objects/id.value-object'
 
 import { KeyResultService } from '../key-result/key-result.service'
@@ -12,10 +14,21 @@ export class KeyResultPorts {
 
   public async getProgressHistoryForKeyResultID(
     primitiveID: string,
+    options: {
+      dateWindow?: DateWindowCategory
+    } = {},
   ): Promise<KeyResultProgressRecordPrimitives[]> {
+    options.dateWindow ??= DateWindowCategory.DAY
+
     const keyResultID = new ID(primitiveID)
     const history = await this.keyResultService.getProgressHistoryForKeyResultID(keyResultID)
 
-    return history.map((entity) => entity.toObject())
+    const bucketWindow = new DateWindow(options.dateWindow)
+    const historyBuckets = this.keyResultService.groupProgressHistoryToBuckets(
+      history,
+      bucketWindow,
+    )
+
+    return historyBuckets.map((entity) => entity.toObject())
   }
 }

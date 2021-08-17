@@ -1,4 +1,5 @@
 import { PersistenceAdapter } from '@adapters/persistence.adapter'
+import { DateWindow } from '@core/common/domain/value-objects/date-window.value-object'
 import { ID } from '@core/common/domain/value-objects/id.value-object'
 import { SortingPorts } from '@core/common/ports/sorting.ports'
 
@@ -21,5 +22,29 @@ export class KeyResultService {
     const results = await this.repositories.progressRecord.getAllFromKeyResultID(id)
 
     return this.sortingPorts.sort(results)
+  }
+
+  public groupProgressHistoryToBuckets(
+    unsortedProgressHistory: KeyResultProgressRecord[],
+    dateWindow: DateWindow,
+  ): KeyResultProgressRecord[] {
+    const sortedProgressHistory = this.sortingPorts.sort(unsortedProgressHistory)
+    const buckets = []
+
+    for (let index = 1; index < sortedProgressHistory.length; index++) {
+      const previous = sortedProgressHistory[index - 1]
+      const current = sortedProgressHistory[index]
+
+      const isInSameDateWindow = dateWindow.isInSameDateWindow(
+        previous.createdAt,
+        current.createdAt,
+      )
+
+      if (isInSameDateWindow) {
+        buckets.push(current)
+      }
+    }
+
+    return buckets
   }
 }
