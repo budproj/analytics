@@ -29,19 +29,19 @@ export class KeyResultService {
     dateWindow: DateWindow,
   ): KeyResultProgressRecord[] {
     const sortedProgressHistory = this.sortingPorts.sort(unsortedProgressHistory)
-    const buckets = []
+    const buckets = [...sortedProgressHistory]
 
-    for (let index = 1; index < sortedProgressHistory.length; index++) {
-      const previous = sortedProgressHistory[index - 1]
+    for (let index = sortedProgressHistory.length - 1; index > 0; index--) {
       const current = sortedProgressHistory[index]
+      const previous = sortedProgressHistory[index - 1]
 
       const isInSameDateWindow = dateWindow.isInSameDateWindow(
-        previous.createdAt,
         current.createdAt,
+        previous.createdAt,
       )
 
       if (isInSameDateWindow) {
-        buckets.push(current)
+        buckets.splice(index - 1, 1)
       }
     }
 

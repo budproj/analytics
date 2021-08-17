@@ -15,15 +15,15 @@ export class KeyResultPorts {
   public async getProgressHistoryForKeyResultID(
     primitiveID: string,
     options: {
-      dateWindow?: DateWindowCategory
+      window?: DateWindowCategory
     } = {},
   ): Promise<KeyResultProgressRecordPrimitives[]> {
-    options.dateWindow ??= DateWindowCategory.DAY
+    options.window ??= DateWindowCategory.DAY
 
     const keyResultID = new ID(primitiveID)
     const history = await this.keyResultService.getProgressHistoryForKeyResultID(keyResultID)
 
-    const bucketWindow = new DateWindow(options.dateWindow)
+    const bucketWindow = new DateWindow(options.window)
     const historyBuckets = this.keyResultService.groupProgressHistoryToBuckets(
       history,
       bucketWindow,

@@ -1,6 +1,7 @@
 import { Controller } from '@nestjs/common'
 import { GrpcMethod } from '@nestjs/microservices'
 
+import { DateWindowCategory } from '@core/common/domain/enums/date-window-category.enum'
 import { KeyResultPorts } from '@core/modules/okr/ports/key-result.ports'
 import { ORMProvider } from '@infrastructure/orm/orm.provider'
 import { KeyResultProgressRecordPrimitives } from '@modules/okr/key-result/primitives/progress-record.primitives'
@@ -12,6 +13,11 @@ import { ProgressHistoryResponse } from './responses/key-result.response'
 
 @Controller()
 export class KeyResultController {
+  static readonly dateWindowCategoryHashmap: Record<number, DateWindowCategory> = {
+    0: DateWindowCategory.DAY,
+    1: DateWindowCategory.WEEK,
+  }
+
   private readonly keyResultPorts: KeyResultPorts
   private readonly controllerAdapter = new GRPCService()
 
@@ -23,7 +29,10 @@ export class KeyResultController {
   protected async getProgressHistory(
     request: ProgressHistoryRequest,
   ): Promise<ProgressHistoryResponse> {
-    const result = await this.keyResultPorts.getProgressHistoryForKeyResultID(request.keyResultId)
+    const window: DateWindowCategory = KeyResultController.dateWindowCategoryHashmap[request.window]
+    const result = await this.keyResultPorts.getProgressHistoryForKeyResultID(request.keyResultId, {
+      window,
+    })
 
     return this.controllerAdapter.marshalResponse<KeyResultProgressRecordPrimitives[]>(result)
   }

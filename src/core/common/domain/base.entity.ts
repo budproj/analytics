@@ -19,9 +19,9 @@ export abstract class Entity<P extends EntityProperties, O extends EntityPrimiti
     const now = DateVO.now()
 
     this.validateProps(properties)
-    this._id = ID.generate()
-    this._createdAt = now
-    this._updatedAt = now
+    this._id = properties.id ?? ID.generate()
+    this._createdAt = properties.createdAt ?? now
+    this._updatedAt = properties.updatedAt ?? now
     this.properties = properties
   }
 
