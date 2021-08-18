@@ -25,16 +25,20 @@ export abstract class Entity<P extends EntityProperties, O extends EntityPrimiti
     this.properties = properties
   }
 
-  get id(): ID {
+  public get id(): ID {
     return this._id
   }
 
-  get createdAt(): DateVO {
+  public get createdAt(): DateVO {
     return this._createdAt
   }
 
-  get updatedAt(): DateVO {
+  public get updatedAt(): DateVO {
     return this._updatedAt
+  }
+
+  protected get comparissonProperty(): keyof O {
+    return 'createdAt'
   }
 
   static isEntity(entity: unknown): entity is Entity<any, any> {
@@ -57,7 +61,10 @@ export abstract class Entity<P extends EntityProperties, O extends EntityPrimiti
     return this.id ? this.id.isEqual(object.id) : false
   }
 
-  public isGreaterThan(other: Entity<P, O>, comparissonProperty: keyof O = 'createdAt'): boolean {
+  public isGreaterThan(
+    other: Entity<P, O>,
+    comparissonProperty: keyof O = this.comparissonProperty,
+  ): boolean {
     const thisPrimitives = this.toObject()
     const otherPrimitives = other.toObject()
 

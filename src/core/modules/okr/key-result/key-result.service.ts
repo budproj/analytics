@@ -35,10 +35,7 @@ export class KeyResultService {
       const current = sortedProgressHistory[index]
       const previous = sortedProgressHistory[index - 1]
 
-      const isInSameDateWindow = dateWindow.isInSameDateWindow(
-        current.createdAt,
-        previous.createdAt,
-      )
+      const isInSameDateWindow = dateWindow.isInSameDateWindow(current.date, previous.date)
 
       if (isInSameDateWindow) {
         buckets.splice(index - 1, 1)

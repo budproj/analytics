@@ -1,5 +1,6 @@
 import { PersistenceAdapter } from '@adapters/persistence.adapter'
 import { EntityRepository } from '@core/common/domain/base.repository'
+import { DateVO } from '@core/common/domain/value-objects/date.value-object'
 import { ID } from '@core/common/domain/value-objects/id.value-object'
 
 import { KeyResultProgressRecord } from '../entities/progress-record.entity'
@@ -36,6 +37,7 @@ export class KeyResultProgressRecordRepository extends EntityRepository<
       ...this.marshalGenericProperties(primitives),
       keyResultId: new ID(primitives.keyResultId),
       progress: new Progress(primitives.progress),
+      date: new DateVO(primitives.date),
     }
   }
 }

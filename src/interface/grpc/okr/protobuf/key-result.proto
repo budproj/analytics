@@ -23,6 +23,5 @@ message ProgressRecord {
   string id = 1;
   string keyResultId = 2;
   float progress = 3;
-  string createdAt = 4;
-  string updatedAt = 5;
+  string date = 6;
 }
