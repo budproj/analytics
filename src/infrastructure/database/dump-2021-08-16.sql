@@ -46,6 +46,17 @@ CREATE TABLE public.key_result (
 
 
 --
+-- Name: key_result_check_in; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.key_result_check_in (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+--
 -- Name: key_result_progress_record; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -55,7 +66,8 @@ CREATE TABLE public.key_result_progress_record (
     updated_at timestamp without time zone DEFAULT now() NOT NULL,
     progress numeric NOT NULL,
     date timestamp without time zone NOT NULL,
-    key_result_id uuid NOT NULL
+    key_result_id uuid NOT NULL,
+    key_result_check_in_id character varying NOT NULL
 );
 
 
@@ -107,13 +119,23 @@ INSERT INTO public.key_result VALUES ('bbacf2fc-f202-49b2-b31d-0df79c59084d', '2
 
 
 --
+-- Data for Name: key_result_check_in; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.key_result_check_in VALUES ('b8399202-4389-444e-bd48-c530a3b03eba', '2021-08-18 00:36:56.020861', '2021-08-18 00:36:56.020861');
+INSERT INTO public.key_result_check_in VALUES ('24041904-c823-49a2-992e-d4aaa6fbf45c', '2021-08-17 21:37:47.440109', '2021-08-17 21:37:47.440109');
+INSERT INTO public.key_result_check_in VALUES ('4056e5db-7303-4878-b5b5-adbe1be092fc', '2021-08-17 21:37:47.821431', '2021-08-17 21:37:47.821431');
+INSERT INTO public.key_result_check_in VALUES ('25dcb54d-0e6a-4555-a5d1-7ebf32403bd6', '2021-08-17 21:37:48.180636', '2021-08-17 21:37:48.180636');
+
+
+--
 -- Data for Name: key_result_progress_record; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.key_result_progress_record VALUES ('20b0e20c-d0ea-45f1-a778-68011bc434d9', '2021-08-16 19:19:30.383998', '2021-08-16 19:19:30.383998', 20, '2021-08-16 19:19:30.383998', '71425c53-39f2-41c8-b896-cd8907d7ed12');
-INSERT INTO public.key_result_progress_record VALUES ('bc1dd255-62ef-47ee-bd23-3d80259afc82', '2021-08-16 19:19:32.685749', '2021-08-16 19:19:32.685749', 50, '2021-08-16 19:19:32.685749', '71425c53-39f2-41c8-b896-cd8907d7ed12');
-INSERT INTO public.key_result_progress_record VALUES ('9ed5faeb-7ff6-4dea-ac2f-36b8bdc7723b', '2021-08-16 19:19:33.395245', '2021-08-16 19:19:33.395245', 0, '2021-08-16 19:19:33.395245', '71425c53-39f2-41c8-b896-cd8907d7ed12');
-INSERT INTO public.key_result_progress_record VALUES ('83bd48e6-0563-4db3-ad22-941cd4e7619c', '2021-08-16 19:19:40.896487', '2021-08-16 19:19:40.896487', 20, '2021-08-16 19:19:40.896487', '1324d1e1-67fc-410c-b221-37fb42f969ed');
+INSERT INTO public.key_result_progress_record VALUES ('9ed5faeb-7ff6-4dea-ac2f-36b8bdc7723b', '2021-08-10 17:19:33', '2021-08-16 19:19:33.395245', 0, '2021-08-16 19:19:33.395245', '71425c53-39f2-41c8-b896-cd8907d7ed12', 'b8399202-4389-444e-bd48-c530a3b03eba');
+INSERT INTO public.key_result_progress_record VALUES ('83bd48e6-0563-4db3-ad22-941cd4e7619c', '2021-08-13 19:19:40', '2021-08-16 19:19:40.896487', 20, '2021-08-16 19:19:40.896487', '1324d1e1-67fc-410c-b221-37fb42f969ed', '24041904-c823-49a2-992e-d4aaa6fbf45c');
+INSERT INTO public.key_result_progress_record VALUES ('bc1dd255-62ef-47ee-bd23-3d80259afc82', '2021-08-12 19:19:32', '2021-08-16 19:19:32.685749', 50, '2021-08-16 19:19:32.685749', '71425c53-39f2-41c8-b896-cd8907d7ed12', '4056e5db-7303-4878-b5b5-adbe1be092fc');
+INSERT INTO public.key_result_progress_record VALUES ('20b0e20c-d0ea-45f1-a778-68011bc434d9', '2021-08-14 19:19:00', '2021-08-16 19:19:30.383998', 20, '2021-08-11 19:19:40', '71425c53-39f2-41c8-b896-cd8907d7ed12', '25dcb54d-0e6a-4555-a5d1-7ebf32403bd6');
 
 
 --
@@ -121,13 +143,22 @@ INSERT INTO public.key_result_progress_record VALUES ('83bd48e6-0563-4db3-ad22-9
 --
 
 INSERT INTO public.migrations VALUES (1, 1628897077262, 'AddsKeyResultAndKeyResultRecord1628897077262');
+INSERT INTO public.migrations VALUES (2, 1629246764279, 'AddsKeyResultCheckIn1629246764279');
 
 
 --
 -- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.migrations_id_seq', 1, true);
+SELECT pg_catalog.setval('public.migrations_id_seq', 2, true);
+
+
+--
+-- Name: key_result_check_in PK_32838fec4e2916067f9e4919d4c; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.key_result_check_in
+    ADD CONSTRAINT "PK_32838fec4e2916067f9e4919d4c" PRIMARY KEY (id);
 
 
 --
