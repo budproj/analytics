@@ -30,8 +30,11 @@ export class KeyResultController {
     request: ProgressHistoryRequest,
   ): Promise<ProgressHistoryResponse> {
     const window: DateWindowCategory = KeyResultController.dateWindowCategoryHashmap[request.window]
+    const startDate: Date = new Date(request.startDate)
+
     const result = await this.keyResultPorts.getProgressHistoryForKeyResultID(request.keyResultId, {
       window,
+      startDate,
     })
 
     return this.controllerAdapter.marshalResponse<KeyResultProgressRecordPrimitives[]>(result)

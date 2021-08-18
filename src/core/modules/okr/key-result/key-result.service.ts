@@ -1,4 +1,5 @@
 import { PersistenceAdapter } from '@adapters/persistence.adapter'
+import { IsBeforeSpecification } from '@core/common/domain/specifications/is-before.specification'
 import { DateWindow } from '@core/common/domain/value-objects/date-window.value-object'
 import { DateVO } from '@core/common/domain/value-objects/date.value-object'
 import { ID } from '@core/common/domain/value-objects/id.value-object'
@@ -29,16 +30,15 @@ export class KeyResultService {
 
     const results = await this.repositories.progressRecord.getAllFromKeyResultID(id)
     const sortedResults = this.sortingPorts.insertionSort(results)
+
+    const isBeforeStartDateSpecification = new IsBeforeSpecification(startDate)
     const sliceIndex = this.searchPorts.sequentialSpecificationSearch(
       sortedResults,
       'date',
-      (t: any) => startDate.isLesserThan(t),
-      // TODO: Create a specification class and move it there to avoid losing the this reference
+      isBeforeStartDateSpecification,
     )
 
-    console.log(sliceIndex)
-
-    return sortedResults
+    return sliceIndex ? sortedResults.slice(0, sliceIndex) : sortedResults
   }
 
   public groupProgressHistoryToBuckets(

@@ -1,13 +1,13 @@
 import { SearchAdapter } from '@adapters/search.adapter'
 import { Entity } from '@core/common/domain/base.entity'
-import { ValueObject } from '@core/common/domain/value-objects/base.value-object'
+import { Specification } from '@core/common/domain/specifications/base.specification'
 
 export class SearchService implements SearchAdapter {
-  public sequentialSpecificationSearch<E extends Entity<any, any>, O extends ValueObject<any>>(
+  public sequentialSpecificationSearch<E extends Entity<any, any>>(
     list: E[],
     key: string,
-    specification: (o: O) => boolean,
+    specification: Specification<any>,
   ): number {
-    return list.findIndex((entity) => specification(entity[key]))
+    return list.findIndex((entity) => specification.isSatisfiedBy(entity[key]))
   }
 }
