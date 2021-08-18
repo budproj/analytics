@@ -4,8 +4,10 @@ import { DomainPrimitive } from '../interfaces/domain-primitive.interface'
 import { ValueObject } from './base.value-object'
 
 export class DateVO extends ValueObject<Date> {
-  constructor(value: Date | string | number) {
+  constructor(value?: Date | string | number) {
+    value ??= Date.now()
     const date = new Date(value)
+
     super({ value: date })
   }
 

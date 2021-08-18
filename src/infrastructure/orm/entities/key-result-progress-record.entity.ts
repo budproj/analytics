@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToOne, RelationId } from 'typeorm'
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, RelationId } from 'typeorm'
 
 import { KeyResultCheckInORMEntityInterface } from '../interfaces/key-result-check-in.entity'
 import { KeyResultProgressRecordORMEntityInterface } from '../interfaces/key-result-progress-record.interface'
@@ -28,6 +28,7 @@ export class KeyResultProgressRecordORMEntity
   @RelationId((progressRecord: KeyResultProgressRecordORMEntity) => progressRecord.keyResultCheckIn)
   public keyResultCheckInId: string
 
+  @JoinColumn()
   @OneToOne('key_result_check_in')
   public keyResultCheckIn: KeyResultCheckInORMEntityInterface
 }

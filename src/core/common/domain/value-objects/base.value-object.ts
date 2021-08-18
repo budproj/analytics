@@ -26,6 +26,18 @@ export abstract class ValueObject<T> {
     return JSON.stringify(this) === JSON.stringify(vo)
   }
 
+  public isGreaterThan(vo?: ValueObject<T>): boolean {
+    if (vo === null || vo === undefined) {
+      return false
+    }
+
+    return JSON.stringify(this) > JSON.stringify(vo)
+  }
+
+  public isLesserThan(vo: ValueObject<T>): boolean {
+    return !this.isGreaterThan(vo)
+  }
+
   public getRawProps(): T {
     if (this.isDomainPrimitive(this.properties)) {
       return this.properties.value
