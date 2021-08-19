@@ -1,0 +1,7 @@
+.git
+.github
+.log
+.waypoint
+dist
+manifests
+scripts
