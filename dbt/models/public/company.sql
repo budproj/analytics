@@ -9,7 +9,7 @@ with
 
   final as  (
     select
-      {{ dbt_utils.surrogate_key(['id']) }}::uuid as id,
+      id,
       id as team_id,
       name,
       created_at,
