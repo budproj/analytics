@@ -4,7 +4,7 @@ with recursive
   ),
 
   company as (
-    select * from {{ ref('dim__company') }}
+    select * from {{ ref('company') }}
   ),
 
   team_parents(id, parent_id, root_id) as (
@@ -25,11 +25,6 @@ with recursive
   team as (
     select 
       id,
-      name,
-      gender,
-      owner_id,
-      parent_id,
-      description,
       created_at,
       updated_at
     from stg_okr__team
@@ -40,8 +35,8 @@ with recursive
       team.*,
       company.id as company_id
       from team
-      left join team_parents on team_parents.id = team.id
-      left join company on company.team_id = team_parents.root_id
+    left join team_parents on team_parents.id = team.id
+    left join company on company.team_id = team_parents.root_id
   )
 
 select * from final

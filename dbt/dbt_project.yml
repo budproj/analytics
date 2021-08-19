@@ -5,6 +5,8 @@ profile: normalize
 
 models:
   analytics:
+    +materialized: table
     public:
-      +materialized: table
       +schema: public
+    staging:
+      +schema: staging
