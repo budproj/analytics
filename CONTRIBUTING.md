@@ -1,4 +1,4 @@
-# Contributing to <repository-name>
+# Contributing to Analytics
 
 * [Code of Conduct](#code-of-conduct)
 * [Issues](#issues)
