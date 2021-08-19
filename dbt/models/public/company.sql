@@ -9,7 +9,7 @@ with
 
   final as  (
     select
-      id,
+      {{ generate_uuid() }} as id,
       id as team_id,
       name,
       created_at,
