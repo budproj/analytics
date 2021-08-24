@@ -1,5 +1,10 @@
 import { EntityPrimitives } from '@core/common/domain/interfaces/entity-object.interface'
 
+import { FormatCategory } from '../enums/format-category.enum'
+
 export interface KeyResultPrimitives extends EntityPrimitives {
-  progressHistory: number[]
+  initialValue: number
+  goal: number
+  format: FormatCategory
+  progressHistory?: number[]
 }

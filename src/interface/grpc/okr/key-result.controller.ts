@@ -2,20 +2,27 @@ import { Controller } from '@nestjs/common'
 import { GrpcMethod } from '@nestjs/microservices'
 
 import { DateWindowCategory } from '@core/common/domain/enums/date-window-category.enum'
+import { FormatCategory } from '@core/modules/okr/key-result/enums/format-category.enum'
 import { KeyResultPorts } from '@core/modules/okr/ports/key-result.ports'
 import { ORMProvider } from '@infrastructure/orm/orm.provider'
-import { KeyResultProgressRecordPrimitives } from '@modules/okr/key-result/primitives/progress-record.primitives'
 
 import { GRPCService } from '../grpc.service'
 
-import { ProgressHistoryRequest } from './requests/key-result.request'
-import { ProgressHistoryResponse } from './responses/key-result.response'
+import { CalculateProgressRequest, ProgressHistoryRequest } from './requests/key-result.request'
+import { CalculateProgressResponse, ProgressHistoryResponse } from './responses/key-result.response'
 
 @Controller()
 export class KeyResultController {
   static readonly dateWindowCategoryHashmap: Record<number, DateWindowCategory> = {
     0: DateWindowCategory.DAY,
     1: DateWindowCategory.WEEK,
+  }
+
+  static readonly formatCategoryHashmap: Record<number, FormatCategory> = {
+    0: FormatCategory.NUMBER,
+    1: FormatCategory.PERCENTAGE,
+    2: FormatCategory.COIN_BRL,
+    3: FormatCategory.COIN_USD,
   }
 
   private readonly keyResultPorts: KeyResultPorts
@@ -37,6 +44,17 @@ export class KeyResultController {
       startDate,
     })
 
-    return this.controllerAdapter.marshalResponse<KeyResultProgressRecordPrimitives[]>(result)
+    return this.controllerAdapter.marshalResponse(result)
+  }
+
+  @GrpcMethod('KeyResultService')
+  protected async calculateProgress(
+    request: CalculateProgressRequest,
+  ): Promise<CalculateProgressResponse> {
+    const format: FormatCategory =
+      KeyResultController.formatCategoryHashmap[request.keyResultData.format]
+    const result = { progress: 0 }
+
+    return this.controllerAdapter.marshalResponse(result)
   }
 }

@@ -3,3 +3,5 @@ import { KeyResultProgressRecordPrimitives } from '@core/modules/okr/key-result/
 import { Response } from '../../interfaces/response.interface'
 
 export interface ProgressHistoryResponse extends Response<KeyResultProgressRecordPrimitives[]> {}
+
+export interface CalculateProgressResponse extends Response<{ progress: number }> {}
