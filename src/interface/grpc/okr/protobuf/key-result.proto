@@ -30,7 +30,7 @@ message ProgressHistoryResponse {
 }
 
 message CalculateProgressResponse {
-  float progress = 1;
+  CalculatedProgress data = 1;
 }
 
 // **************************************************************************
@@ -60,4 +60,8 @@ message KeyResultProgressData {
   float initialValue = 1;
   float goal = 2;
   KeyResultFormat format = 3;
+}
+
+message CalculatedProgress {
+  float progress = 1;
 }

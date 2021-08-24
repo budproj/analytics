@@ -4,6 +4,7 @@ import { DateVO } from '@core/common/domain/value-objects/date.value-object'
 import { ID } from '@core/common/domain/value-objects/id.value-object'
 import { PrimaryPorts } from '@core/common/ports/primary.ports'
 
+import { FormatCategory } from '../key-result/enums/format-category.enum'
 import { KeyResultService } from '../key-result/key-result.service'
 import { KeyResultProgressRecordPrimitives } from '../key-result/primitives/progress-record.primitives'
 
@@ -39,5 +40,16 @@ export class KeyResultPorts extends PrimaryPorts {
     )
 
     return this.unmarshalEntityList(historyBuckets)
+  }
+
+  public calculateProgressForPrimitiveKeyResultdata(
+    value: number,
+    primitiveKeyResultData: {
+      initialValue: number
+      goal: number
+      format: FormatCategory
+    },
+  ): number {
+    return 100
   }
 }

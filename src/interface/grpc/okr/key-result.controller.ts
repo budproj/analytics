@@ -48,13 +48,20 @@ export class KeyResultController {
   }
 
   @GrpcMethod('KeyResultService')
-  protected async calculateProgress(
-    request: CalculateProgressRequest,
-  ): Promise<CalculateProgressResponse> {
+  protected calculateProgress(request: CalculateProgressRequest): CalculateProgressResponse {
+    const initialValue: number = request.keyResultData.initialValue ?? 0
+    const goal: number = request.keyResultData.goal ?? 0
     const format: FormatCategory =
       KeyResultController.formatCategoryHashmap[request.keyResultData.format]
-    const result = { progress: 0 }
 
-    return this.controllerAdapter.marshalResponse(result)
+    const progress = this.keyResultPorts.calculateProgressForPrimitiveKeyResultdata(request.value, {
+      initialValue,
+      goal,
+      format,
+    })
+
+    return this.controllerAdapter.marshalResponse({
+      progress,
+    })
   }
 }
