@@ -3,11 +3,23 @@ import { ValueObject } from '@core/common/domain/value-objects/base.value-object
 import { NumberVO } from '@core/common/domain/value-objects/number.value-object'
 import { ArgumentInvalidException } from '@core/common/exceptions/argument-invalid.exception'
 
+import { IsThresholdBeforeSpecification } from '../specifications/is-threshold-before.specification'
+
 import { Percentage } from './percentage.value-object'
+import { Type } from './type.value-object'
 
 export class Threshold extends ValueObject<number> {
-  constructor(value: number) {
+  public readonly type: Type
+
+  constructor(
+    value: number,
+    options: {
+      type?: Type
+    } = {},
+  ) {
     super({ value })
+
+    this.type = options.type || Type.generate()
   }
 
   public get value(): number {
@@ -18,11 +30,18 @@ export class Threshold extends ValueObject<number> {
     return new Threshold(0)
   }
 
-  public calculateProgress(value: NumberVO, otherThreshold: Threshold): Percentage {
-    const min = Math.min(this.value, otherThreshold.value)
-    const max = Math.max(this.value, otherThreshold.value)
+  public calculateProgress(value: NumberVO, maxThreshold: Threshold): Percentage {
+    return new Percentage(value, maxThreshold, { offset: this })
+  }
 
-    return new Percentage(value.value, max, { offset: min })
+  public isBefore(threshold: Threshold): boolean {
+    const specification = new IsThresholdBeforeSpecification(this)
+
+    return specification.isSatisfiedBy(threshold)
+  }
+
+  public isAfter(threshold: Threshold): boolean {
+    return !this.isBefore(threshold)
   }
 
   protected validate({ value }: DomainPrimitive<number>): void {

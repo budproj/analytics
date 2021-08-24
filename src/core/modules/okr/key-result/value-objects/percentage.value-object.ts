@@ -1,22 +1,25 @@
 import { DomainPrimitive } from '@core/common/domain/interfaces/domain-primitive.interface'
 import { ValueObject } from '@core/common/domain/value-objects/base.value-object'
+import { NumberVO } from '@core/common/domain/value-objects/number.value-object'
 import { ArgumentInvalidException } from '@core/common/exceptions/argument-invalid.exception'
+
+import { Threshold } from './threshold.value-object'
 
 export class Percentage extends ValueObject<number> {
   private readonly base: number
   private readonly offset: number
 
   constructor(
-    value: number,
-    base?: number,
+    number: NumberVO,
+    base?: Threshold,
     options: {
-      offset?: number
+      offset?: Threshold
     } = {},
   ) {
-    super({ value })
+    super({ value: number.value })
 
-    this.offset = options.offset ?? 0
-    this.base = base ?? 100
+    this.offset = options.offset.value ?? 0
+    this.base = base.value ?? 100
   }
 
   public get value(): number {
@@ -24,7 +27,9 @@ export class Percentage extends ValueObject<number> {
   }
 
   static generate(): Percentage {
-    return new Percentage(0)
+    const number = NumberVO.generate()
+
+    return new Percentage(number)
   }
 
   protected validate({ value }: DomainPrimitive<number>): void {

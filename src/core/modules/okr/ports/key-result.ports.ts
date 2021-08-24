@@ -53,12 +53,15 @@ export class KeyResultPorts extends PrimaryPorts {
       type: TypeCategory
     },
   ): number {
-    const value = new NumberVO(primitiveValue)
-    const initialValue = new Threshold(primitiveKeyResultData.initialValue)
-    const goal = new Threshold(primitiveKeyResultData.goal)
     const type = new Type(primitiveKeyResultData.type)
+    const value = new NumberVO(primitiveValue)
+    const initialValue = new Threshold(primitiveKeyResultData.initialValue, { type })
+    const goal = new Threshold(primitiveKeyResultData.goal, { type })
 
-    const progress = initialValue.calculateProgress(value, goal)
+    const offsetThreshold = initialValue.isBefore(goal) ? initialValue : goal
+    const baseThreshold = goal.isAfter(initialValue) ? goal : initialValue
+
+    const progress = offsetThreshold.calculateProgress(value, baseThreshold)
 
     return progress.value
   }

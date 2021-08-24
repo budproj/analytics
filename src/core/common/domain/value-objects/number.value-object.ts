@@ -12,7 +12,7 @@ export class NumberVO extends ValueObject<number> {
     return this.properties.value
   }
 
-  public static now(): NumberVO {
+  public static generate(): NumberVO {
     return new NumberVO(0)
   }
 

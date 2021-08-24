@@ -34,7 +34,8 @@ export class KeyResultController {
   protected async getProgressHistory(
     request: ProgressHistoryRequest,
   ): Promise<ProgressHistoryResponse> {
-    const window: DateWindowCategory = KeyResultController.dateWindowCategoryHashmap[request.window]
+    const window: DateWindowCategory =
+      KeyResultController.dateWindowCategoryHashmap[request.window ?? 0]
     const startDate = new Date(request.startDate ?? Date.now())
 
     const result = await this.keyResultPorts.getProgressHistoryForKeyResultID(request.keyResultId, {
@@ -49,7 +50,8 @@ export class KeyResultController {
   protected calculateProgress(request: CalculateProgressRequest): CalculateProgressResponse {
     const initialValue: number = request.keyResultData.initialValue ?? 0
     const goal: number = request.keyResultData.goal ?? 0
-    const type: TypeCategory = KeyResultController.typeCategoryHashmap[request.keyResultData.type]
+    const type: TypeCategory =
+      KeyResultController.typeCategoryHashmap[request.keyResultData.type ?? 0]
 
     const progress = this.keyResultPorts.calculateProgressForPrimitiveKeyResultdata(request.value, {
       initialValue,
