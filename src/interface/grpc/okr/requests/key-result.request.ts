@@ -12,5 +12,5 @@ export interface CalculateProgressRequest {
 interface KeyResultProgressData {
   initialValue: number
   goal: number
-  format: number
+  type: number
 }

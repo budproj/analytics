@@ -42,6 +42,11 @@ enum DateWindow {
   WEEK = 1;
 }
 
+enum Type {
+  ASCENDING = 0;
+  DESCENDING = 1;
+}
+
 message ProgressRecord {
   string id = 1;
   string keyResultId = 2;
@@ -52,6 +57,7 @@ message ProgressRecord {
 message KeyResultProgressData {
   float initialValue = 1;
   float goal = 2;
+  Type type = 3;
 }
 
 message CalculatedProgress {

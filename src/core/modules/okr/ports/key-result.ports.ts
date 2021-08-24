@@ -5,9 +5,11 @@ import { ID } from '@core/common/domain/value-objects/id.value-object'
 import { NumberVO } from '@core/common/domain/value-objects/number.value-object'
 import { PrimaryPorts } from '@core/common/ports/primary.ports'
 
+import { TypeCategory } from '../key-result/enums/type-category.enum'
 import { KeyResultService } from '../key-result/key-result.service'
 import { KeyResultProgressRecordPrimitives } from '../key-result/primitives/progress-record.primitives'
 import { Threshold } from '../key-result/value-objects/threshold.value-object'
+import { Type } from '../key-result/value-objects/type.value-object'
 
 export class KeyResultPorts extends PrimaryPorts {
   private readonly keyResultService: KeyResultService
@@ -48,11 +50,13 @@ export class KeyResultPorts extends PrimaryPorts {
     primitiveKeyResultData: {
       initialValue: number
       goal: number
+      type: TypeCategory
     },
   ): number {
     const value = new NumberVO(primitiveValue)
     const initialValue = new Threshold(primitiveKeyResultData.initialValue)
     const goal = new Threshold(primitiveKeyResultData.goal)
+    const type = new Type(primitiveKeyResultData.type)
 
     const progress = initialValue.calculateProgress(value, goal)
 
