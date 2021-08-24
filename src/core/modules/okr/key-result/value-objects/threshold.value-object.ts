@@ -3,7 +3,7 @@ import { ValueObject } from '@core/common/domain/value-objects/base.value-object
 import { NumberVO } from '@core/common/domain/value-objects/number.value-object'
 import { ArgumentInvalidException } from '@core/common/exceptions/argument-invalid.exception'
 
-import { Progress } from './progress.value-object'
+import { Percentage } from './percentage.value-object'
 
 export class Threshold extends ValueObject<number> {
   constructor(value: number) {
@@ -18,10 +18,11 @@ export class Threshold extends ValueObject<number> {
     return new Threshold(0)
   }
 
-  public calculateProgress(value: NumberVO, rightThreshold: Threshold): Progress {
-    const progress = new Progress(0)
+  public calculateProgress(value: NumberVO, otherThreshold: Threshold): Percentage {
+    const min = Math.min(this.value, otherThreshold.value)
+    const max = Math.max(this.value, otherThreshold.value)
 
-    return progress
+    return new Percentage(value.value, max, { offset: min })
   }
 
   protected validate({ value }: DomainPrimitive<number>): void {

@@ -16,7 +16,7 @@ export class Progress extends ValueObject<number> {
   }
 
   protected validate({ value }: DomainPrimitive<number>): void {
-    if (Number.isNaN(value) || value < 0 || value > 100) {
+    if (Number.isNaN(value) || value < 0 || value >= 1) {
       throw new ArgumentInvalidException('Incorrect progress format')
     }
   }
