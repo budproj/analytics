@@ -42,13 +42,6 @@ enum DateWindow {
   WEEK = 1;
 }
 
-enum KeyResultFormat {
-  NUMBER = 0;
-  PERCENTAGE = 1;
-  COIN_BRL = 2;
-  COIN_USD = 3;
-}
-
 message ProgressRecord {
   string id = 1;
   string keyResultId = 2;
@@ -59,7 +52,6 @@ message ProgressRecord {
 message KeyResultProgressData {
   float initialValue = 1;
   float goal = 2;
-  KeyResultFormat format = 3;
 }
 
 message CalculatedProgress {

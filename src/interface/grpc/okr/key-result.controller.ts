@@ -2,7 +2,6 @@ import { Controller } from '@nestjs/common'
 import { GrpcMethod } from '@nestjs/microservices'
 
 import { DateWindowCategory } from '@core/common/domain/enums/date-window-category.enum'
-import { FormatCategory } from '@core/modules/okr/key-result/enums/format-category.enum'
 import { KeyResultPorts } from '@core/modules/okr/ports/key-result.ports'
 import { ORMProvider } from '@infrastructure/orm/orm.provider'
 
@@ -16,13 +15,6 @@ export class KeyResultController {
   static readonly dateWindowCategoryHashmap: Record<number, DateWindowCategory> = {
     0: DateWindowCategory.DAY,
     1: DateWindowCategory.WEEK,
-  }
-
-  static readonly formatCategoryHashmap: Record<number, FormatCategory> = {
-    0: FormatCategory.NUMBER,
-    1: FormatCategory.PERCENTAGE,
-    2: FormatCategory.COIN_BRL,
-    3: FormatCategory.COIN_USD,
   }
 
   private readonly keyResultPorts: KeyResultPorts
@@ -51,13 +43,10 @@ export class KeyResultController {
   protected calculateProgress(request: CalculateProgressRequest): CalculateProgressResponse {
     const initialValue: number = request.keyResultData.initialValue ?? 0
     const goal: number = request.keyResultData.goal ?? 0
-    const format: FormatCategory =
-      KeyResultController.formatCategoryHashmap[request.keyResultData.format]
 
     const progress = this.keyResultPorts.calculateProgressForPrimitiveKeyResultdata(request.value, {
       initialValue,
       goal,
-      format,
     })
 
     return this.controllerAdapter.marshalResponse({

@@ -8,7 +8,6 @@ with
       id,
       initial_value,
       goal,
-      format,
       created_at,
       updated_at
     from stg_okr__key_result

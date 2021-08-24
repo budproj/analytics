@@ -2,11 +2,12 @@ import { DateWindowCategory } from '@core/common/domain/enums/date-window-catego
 import { DateWindow } from '@core/common/domain/value-objects/date-window.value-object'
 import { DateVO } from '@core/common/domain/value-objects/date.value-object'
 import { ID } from '@core/common/domain/value-objects/id.value-object'
+import { NumberVO } from '@core/common/domain/value-objects/number.value-object'
 import { PrimaryPorts } from '@core/common/ports/primary.ports'
 
-import { FormatCategory } from '../key-result/enums/format-category.enum'
 import { KeyResultService } from '../key-result/key-result.service'
 import { KeyResultProgressRecordPrimitives } from '../key-result/primitives/progress-record.primitives'
+import { Threshold } from '../key-result/value-objects/threshold.value-object'
 
 export class KeyResultPorts extends PrimaryPorts {
   private readonly keyResultService: KeyResultService
@@ -43,13 +44,18 @@ export class KeyResultPorts extends PrimaryPorts {
   }
 
   public calculateProgressForPrimitiveKeyResultdata(
-    value: number,
+    primitiveValue: number,
     primitiveKeyResultData: {
       initialValue: number
       goal: number
-      format: FormatCategory
     },
   ): number {
-    return 100
+    const value = new NumberVO(primitiveValue)
+    const initialValue = new Threshold(primitiveKeyResultData.initialValue)
+    const goal = new Threshold(primitiveKeyResultData.goal)
+
+    const progress = initialValue.calculateProgress(value, goal)
+
+    return progress.value
   }
 }
