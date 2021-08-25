@@ -10,6 +10,10 @@ export class KeyResultCheckIn extends Entity<
   KeyResultCheckInProperties,
   KeyResultCheckInPrimitives
 > {
+  public get value(): NumberVO {
+    return this.properties.value
+  }
+
   static load(primitives: KeyResultCheckInPrimitives): KeyResultCheckIn {
     const genericProperties = Entity.marshalGenericProperties(primitives)
     const properties: KeyResultCheckInProperties = {

@@ -6,6 +6,9 @@ import { KeyResultProgressRecordPrimitives } from '../primitives/progress-record
 import { KeyResultProgressRecordProperties } from '../properties/progress-record.properties'
 import { Progress } from '../value-objects/progress.value-object'
 
+import { KeyResultCheckIn } from './key-result-check-in.entity'
+import { KeyResult } from './key-result.entity'
+
 export class KeyResultProgressRecord extends Entity<
   KeyResultProgressRecordProperties,
   KeyResultProgressRecordPrimitives
@@ -18,6 +21,18 @@ export class KeyResultProgressRecord extends Entity<
     return this.properties.date
   }
 
+  static generate(primitives: Partial<KeyResultProgressRecordPrimitives>): KeyResultProgressRecord {
+    const genericProperties = Entity.generate(primitives)
+    const properties: KeyResultProgressRecordProperties = {
+      ...genericProperties,
+      keyResultId: new ID(primitives.keyResultId),
+      progress: new Progress(primitives.progress),
+      date: new DateVO(primitives.date),
+    }
+
+    return new KeyResultProgressRecord(properties)
+  }
+
   static load(primitives: KeyResultProgressRecordPrimitives): KeyResultProgressRecord {
     const genericProperties = Entity.marshalGenericProperties(primitives)
     const properties: KeyResultProgressRecordProperties = {
@@ -28,6 +43,22 @@ export class KeyResultProgressRecord extends Entity<
     }
 
     return new KeyResultProgressRecord(properties)
+  }
+
+  static fromCheckIn(checkIn: KeyResultCheckIn, keyResult: KeyResult): KeyResultProgressRecord {
+    const { id: keyResultID, initialValue, goal } = keyResult
+
+    const offsetThreshold = initialValue.isBefore(goal) ? initialValue : goal
+    const baseThreshold = goal.isAfter(initialValue) ? goal : initialValue
+
+    const percentage = offsetThreshold.calculateProgress(checkIn.value, baseThreshold)
+    const primitives = {
+      keyResultId: keyResultID.value,
+      progress: percentage.value,
+      date: checkIn.createdAt.value,
+    }
+
+    return KeyResultProgressRecord.generate(primitives)
   }
 
   protected get comparissonProperty(): keyof KeyResultProgressRecordPrimitives {

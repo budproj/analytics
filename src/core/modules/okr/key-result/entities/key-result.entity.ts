@@ -6,6 +6,14 @@ import { Threshold } from '../value-objects/threshold.value-object'
 import { Type } from '../value-objects/type.value-object'
 
 export class KeyResult extends Entity<KeyResultProperties, KeyResultPrimitives> {
+  public get initialValue(): Threshold {
+    return this.properties.initialValue
+  }
+
+  public get goal(): Threshold {
+    return this.properties.goal
+  }
+
   static load(primitives: KeyResultPrimitives): KeyResult {
     const genericProperties = Entity.marshalGenericProperties(primitives)
     const properties: KeyResultProperties = {

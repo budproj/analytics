@@ -71,7 +71,8 @@ export class KeyResultService {
     keyResultID: ID,
   ): Promise<KeyResultProgressRecord> {
     const keyResult = await this.repositories.keyResult.getOne({ id: keyResultID })
-    console.log(keyResult)
+    const headProgressRecord = KeyResultProgressRecord.fromCheckIn(checkIn, keyResult)
+    console.log(headProgressRecord)
 
     return {} as any
   }

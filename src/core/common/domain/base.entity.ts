@@ -41,6 +41,14 @@ export abstract class Entity<P extends EntityProperties, O extends EntityPrimiti
     return 'createdAt'
   }
 
+  static generate(primitives: Partial<EntityPrimitives>): EntityProperties {
+    return {
+      id: primitives.id ? new ID(primitives.id) : ID.generate(),
+      createdAt: primitives.createdAt ? new DateVO(primitives.createdAt) : DateVO.now(),
+      updatedAt: primitives.updatedAt ? new DateVO(primitives.updatedAt) : DateVO.now(),
+    }
+  }
+
   static isEntity(entity: unknown): entity is Entity<any, any> {
     return entity instanceof Entity
   }
