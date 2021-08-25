@@ -15,6 +15,14 @@ export class KeyResultProgressRecordRepository extends EntityRepository<
     super(KeyResultProgressRecord.name, persistenceAdapter)
   }
 
+  public async getOne(
+    indexes: Partial<KeyResultProgressRecordProperties>,
+  ): Promise<KeyResultProgressRecord> {
+    const persistedData = await this.persistence.getOneFromDatabase(indexes)
+
+    return KeyResultProgressRecord.load(persistedData)
+  }
+
   public async getMany(
     indexes: Partial<KeyResultProgressRecordProperties>,
   ): Promise<KeyResultProgressRecord[]> {

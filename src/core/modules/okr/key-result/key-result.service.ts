@@ -8,17 +8,20 @@ import { SortingPorts } from '@core/common/ports/sorting.ports'
 
 import { KeyResultCheckIn } from './entities/key-result-check-in.entity'
 import { KeyResultProgressRecord } from './entities/progress-record.entity'
+import { KeyResultRepository } from './repositories/key-result.repository'
 import { KeyResultProgressRecordRepository } from './repositories/progress-record.repository'
 
 export class KeyResultService {
   private readonly sortingPorts = new SortingPorts()
   private readonly searchPorts = new SearchPorts()
   private readonly repositories: {
+    keyResult: KeyResultRepository
     progressRecord: KeyResultProgressRecordRepository
   }
 
   public constructor(persistenceAdapter: PersistenceAdapter) {
     this.repositories = {
+      keyResult: new KeyResultRepository(persistenceAdapter),
       progressRecord: new KeyResultProgressRecordRepository(persistenceAdapter),
     }
   }
@@ -63,10 +66,13 @@ export class KeyResultService {
     return buckets
   }
 
-  public generateProgressRecordForCheckIn(
+  public async generateProgressRecordForCheckIn(
     checkIn: KeyResultCheckIn,
     keyResultID: ID,
-  ): KeyResultProgressRecord {
+  ): Promise<KeyResultProgressRecord> {
+    const keyResult = await this.repositories.keyResult.getOne({ id: keyResultID })
+    console.log(keyResult)
+
     return {} as any
   }
 }

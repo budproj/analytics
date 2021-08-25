@@ -11,6 +11,12 @@ export class PersistencePorts<P extends EntityProperties, O extends EntityPrimit
     this.adapter = adapter
   }
 
+  public async getOneFromDatabase(request: Partial<P>): Promise<O> {
+    const indexes = unmarshalProperties<O>(request)
+
+    return this.adapter.getOneFromNamedEntity<O>(indexes, this.entityName)
+  }
+
   public async getManyFromDatabase(request: Partial<P>): Promise<O[]> {
     const indexes = unmarshalProperties<O>(request)
 

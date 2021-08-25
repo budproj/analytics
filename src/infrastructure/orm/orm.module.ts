@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { ORMConfigModule } from '@config/orm/orm.module'
 
 import { ORMFactory } from './orm.factory'
-import { ORMProvider } from './orm.provider'
+import { ORMService } from './orm.service'
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { ORMProvider } from './orm.provider'
       useClass: ORMFactory,
     }),
   ],
-  providers: [ORMProvider],
-  exports: [ORMProvider],
+  providers: [ORMService],
+  exports: [ORMService],
 })
 export class ORMModule {}

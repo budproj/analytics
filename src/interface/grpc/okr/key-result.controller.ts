@@ -4,7 +4,7 @@ import { GrpcMethod } from '@nestjs/microservices'
 import { DateWindowCategory } from '@core/common/domain/enums/date-window-category.enum'
 import { TypeCategory } from '@core/modules/okr/key-result/enums/type-category.enum'
 import { KeyResultPorts } from '@core/modules/okr/ports/key-result.ports'
-import { ORMProvider } from '@infrastructure/orm/orm.provider'
+import { ORMService } from '@infrastructure/orm/orm.service'
 
 import { GRPCService } from '../grpc.service'
 
@@ -30,7 +30,7 @@ export class KeyResultController {
   private readonly keyResultPorts: KeyResultPorts
   private readonly controllerAdapter = new GRPCService()
 
-  public constructor(persistenceAdapter: ORMProvider) {
+  public constructor(persistenceAdapter: ORMService) {
     this.keyResultPorts = new KeyResultPorts(persistenceAdapter)
   }
 

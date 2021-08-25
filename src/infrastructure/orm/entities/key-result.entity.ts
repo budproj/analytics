@@ -16,7 +16,7 @@ export class KeyResultORMEntity extends ORMEntity {
   public goal!: number
 
   @Column({ type: 'simple-enum', enum: TypeCategory, default: TypeCategory.ASCENDING })
-  public format!: TypeCategory
+  public type!: TypeCategory
 
   @OneToMany('key_result_progress_record', 'keyResult', { nullable: true })
   public progressRecords?: KeyResultProgressRecordORMEntityInterface[]

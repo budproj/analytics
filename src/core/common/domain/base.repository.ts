@@ -17,5 +17,7 @@ export abstract class EntityRepository<
     this.persistence = new PersistencePorts(entityName, persistenceAdapter)
   }
 
+  public abstract getOne(indexes: Partial<E>): Promise<E>
+
   public abstract getMany(indexes: Partial<E>): Promise<E[]>
 }
