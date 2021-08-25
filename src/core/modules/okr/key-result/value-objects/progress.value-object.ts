@@ -24,7 +24,7 @@ export class Progress extends ValueObject<number> {
   }
 
   static generate(): Progress {
-    return new Progress(0)
+    return new Progress(Progress.min)
   }
 
   protected validate({ value }: DomainPrimitive<number>): void {
