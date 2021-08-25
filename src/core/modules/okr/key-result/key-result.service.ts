@@ -6,30 +6,30 @@ import { ID } from '@core/common/domain/value-objects/id.value-object'
 import { SearchPorts } from '@core/common/ports/search.ports'
 import { SortingPorts } from '@core/common/ports/sorting.ports'
 
-import { KeyResultCheckIn } from './entities/key-result-check-in.entity'
-import { KeyResultProgressRecord } from './entities/progress-record.entity'
+import { CheckIn } from './entities/check-in.entity'
+import { ProgressRecord } from './entities/progress-record.entity'
 import { KeyResultRepository } from './repositories/key-result.repository'
-import { KeyResultProgressRecordRepository } from './repositories/progress-record.repository'
+import { ProgressRecordRepository } from './repositories/progress-record.repository'
 
 export class KeyResultService {
   private readonly sortingPorts = new SortingPorts()
   private readonly searchPorts = new SearchPorts()
   private readonly repositories: {
     keyResult: KeyResultRepository
-    progressRecord: KeyResultProgressRecordRepository
+    progressRecord: ProgressRecordRepository
   }
 
   public constructor(persistenceAdapter: PersistenceAdapter) {
     this.repositories = {
       keyResult: new KeyResultRepository(persistenceAdapter),
-      progressRecord: new KeyResultProgressRecordRepository(persistenceAdapter),
+      progressRecord: new ProgressRecordRepository(persistenceAdapter),
     }
   }
 
   public async getProgressHistoryForKeyResultID(
     id: ID,
     startDate?: DateVO,
-  ): Promise<KeyResultProgressRecord[]> {
+  ): Promise<ProgressRecord[]> {
     startDate ??= new DateVO()
 
     const results = await this.repositories.progressRecord.getAllFromKeyResultID(id)
@@ -46,9 +46,9 @@ export class KeyResultService {
   }
 
   public groupProgressHistoryToBuckets(
-    unsortedProgressHistory: KeyResultProgressRecord[],
+    unsortedProgressHistory: ProgressRecord[],
     dateWindow: DateWindow,
-  ): KeyResultProgressRecord[] {
+  ): ProgressRecord[] {
     const sortedProgressHistory = this.sortingPorts.insertionSort(unsortedProgressHistory)
     const buckets = [...sortedProgressHistory]
 
@@ -67,11 +67,11 @@ export class KeyResultService {
   }
 
   public async generateProgressRecordForCheckIn(
-    checkIn: KeyResultCheckIn,
+    checkIn: CheckIn,
     keyResultID: ID,
-  ): Promise<KeyResultProgressRecord> {
+  ): Promise<ProgressRecord> {
     const keyResult = await this.repositories.keyResult.getOne({ id: keyResultID })
-    const headProgressRecord = KeyResultProgressRecord.fromCheckIn(checkIn, keyResult)
+    const headProgressRecord = ProgressRecord.fromCheckIn(checkIn, keyResult)
     console.log(headProgressRecord)
 
     return {} as any

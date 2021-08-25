@@ -3,7 +3,7 @@ import { EntityManager, getManager } from 'typeorm'
 
 import { PersistenceAdapter } from '@adapters/persistence.adapter'
 import { KeyResult } from '@core/modules/okr/key-result/entities/key-result.entity'
-import { KeyResultProgressRecord } from '@core/modules/okr/key-result/entities/progress-record.entity'
+import { ProgressRecord } from '@core/modules/okr/key-result/entities/progress-record.entity'
 
 import { ORMEntity } from './entities/base.entity'
 import { KeyResultProgressRecordORMEntity } from './entities/key-result-progress-record.entity'
@@ -14,7 +14,7 @@ export class ORMService implements PersistenceAdapter, OnModuleInit {
   private manager: EntityManager
   private readonly entityHashmap: Record<string, typeof ORMEntity> = {
     [KeyResult.name]: KeyResultORMEntity,
-    [KeyResultProgressRecord.name]: KeyResultProgressRecordORMEntity,
+    [ProgressRecord.name]: KeyResultProgressRecordORMEntity,
   }
 
   public onModuleInit() {

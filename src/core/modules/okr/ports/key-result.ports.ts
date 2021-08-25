@@ -5,11 +5,11 @@ import { ID } from '@core/common/domain/value-objects/id.value-object'
 import { NumberVO } from '@core/common/domain/value-objects/number.value-object'
 import { PrimaryPorts } from '@core/common/ports/primary.ports'
 
-import { KeyResultCheckIn } from '../key-result/entities/key-result-check-in.entity'
-import { KeyResultProgressRecord } from '../key-result/entities/progress-record.entity'
+import { CheckIn } from '../key-result/entities/check-in.entity'
+import { ProgressRecord } from '../key-result/entities/progress-record.entity'
 import { TypeCategory } from '../key-result/enums/type-category.enum'
 import { KeyResultService } from '../key-result/key-result.service'
-import { KeyResultProgressRecordPrimitives } from '../key-result/primitives/progress-record.primitives'
+import { ProgressRecordPrimitives } from '../key-result/primitives/progress-record.primitives'
 import { Threshold } from '../key-result/value-objects/threshold.value-object'
 import { Type } from '../key-result/value-objects/type.value-object'
 
@@ -27,7 +27,7 @@ export class KeyResultPorts extends PrimaryPorts {
       window?: DateWindowCategory
       startDate?: Date
     } = {},
-  ): Promise<KeyResultProgressRecordPrimitives[]> {
+  ): Promise<ProgressRecordPrimitives[]> {
     options.window ??= DateWindowCategory.DAY
     options.startDate ??= new Date()
 
@@ -49,22 +49,22 @@ export class KeyResultPorts extends PrimaryPorts {
 
   public async pushKeyResultCheckInToProgressHistory(
     primitiveKeyResultID: string,
-    primitiveHistory: KeyResultProgressRecordPrimitives[],
+    primitiveHistory: ProgressRecordPrimitives[],
     primitiveKeyResultCheckIn: {
       value: number
       createdAt: Date
     },
-  ): Promise<KeyResultProgressRecordPrimitives[]> {
+  ): Promise<ProgressRecordPrimitives[]> {
     const keyResultID = new ID(primitiveKeyResultID)
 
-    const headCheckIn = KeyResultCheckIn.loadUnknown(primitiveKeyResultCheckIn)
+    const headCheckIn = CheckIn.loadUnknown(primitiveKeyResultCheckIn)
     const headProgressRecord = this.keyResultService.generateProgressRecordForCheckIn(
       headCheckIn,
       keyResultID,
     )
 
     const history = primitiveHistory.map((primitiveProgressRecord) =>
-      KeyResultProgressRecord.load(primitiveProgressRecord),
+      ProgressRecord.load(primitiveProgressRecord),
     )
 
     return []
