@@ -51,6 +51,7 @@ export class KeyResultPorts extends PrimaryPorts {
     primitiveKeyResultID: string,
     primitiveHistory: ProgressRecordPrimitives[],
     primitiveKeyResultCheckIn: {
+      id: string
       value: number
       createdAt: Date
     },

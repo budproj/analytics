@@ -23,9 +23,9 @@ export class CheckIn extends Entity<CheckInProperties, CheckInPrimitives> {
 
   static loadUnknown(primitives: { value: number; createdAt: Date }): CheckIn {
     return CheckIn.load({
-      ...primitives,
       id: ID.generate().value,
       updatedAt: DateVO.now().value,
+      ...primitives,
     })
   }
 }

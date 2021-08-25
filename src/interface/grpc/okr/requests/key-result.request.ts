@@ -20,6 +20,7 @@ interface KeyResultProgressData {
 }
 
 interface KeyResultCheckInData {
+  id: string
   value: number
   createdAt: string
 }

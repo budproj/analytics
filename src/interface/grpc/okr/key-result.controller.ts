@@ -38,6 +38,7 @@ export class KeyResultController {
   protected async getProgressHistory(
     request: ProgressHistoryRequest,
   ): Promise<ProgressHistoryResponse> {
+    console.log('ok')
     const window: DateWindowCategory =
       KeyResultController.dateWindowCategoryHashmap[request.window ?? 0]
     const startDate = new Date(request.startDate ?? Date.now())
