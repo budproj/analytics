@@ -4,6 +4,10 @@ export interface ProgressHistoryRequest {
   startDate?: string
 }
 
+export interface ProgressHistoryWithStaticHeadRequest extends ProgressHistoryRequest {
+  headKeyResultCheckInData: KeyResultCheckInData
+}
+
 export interface CalculateProgressRequest {
   value: number
   keyResultData: KeyResultProgressData
@@ -13,4 +17,9 @@ interface KeyResultProgressData {
   initialValue: number
   goal: number
   type: number
+}
+
+interface KeyResultCheckInData {
+  value: number
+  createdAt: string
 }

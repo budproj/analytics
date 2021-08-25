@@ -3,7 +3,7 @@ package keyResult;
 
 service KeyResultService {
   rpc GetProgressHistory (ProgressHistoryRequest) returns (ProgressHistoryResponse);
-  rpc GetProgressHistoryWithStaticHead (OrigressHistoryWithStaticHeadRequest) returns (ProgressHistoryResponse);
+  rpc GetProgressHistoryWithStaticHead (ProgressHistoryWithStaticHeadRequest) returns (ProgressHistoryResponse);
   rpc CalculateProgress (CalculateProgressRequest) returns (CalculateProgressResponse);
 }
 
@@ -21,7 +21,7 @@ message ProgressHistoryWithStaticHeadRequest {
   string keyResultId = 1;
   DateWindow window = 2;
   string startDate = 3;
-  KeyResultCheckInData keyResultCheckIn = 4;
+  KeyResultCheckInData headKeyResultCheckInData = 4;
 }
 
 message CalculateProgressRequest {
@@ -73,6 +73,6 @@ message CalculatedProgress {
 }
 
 message KeyResultCheckInData {
-  number value = 1;
+  float value = 1;
   string createdAt = 2;
 }

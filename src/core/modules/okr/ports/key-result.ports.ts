@@ -45,6 +45,17 @@ export class KeyResultPorts extends PrimaryPorts {
     return this.unmarshalEntityList(historyBuckets)
   }
 
+  public pushKeyResultCheckInToProgressHistory(
+    history: KeyResultProgressRecordPrimitives[],
+    primitiveKeyResultCheckIn: {
+      value: number
+      createdAt: Date
+    },
+  ): KeyResultProgressRecordPrimitives[] {
+    console.log(history, primitiveKeyResultCheckIn)
+    return []
+  }
+
   public calculateProgressForPrimitiveKeyResultdata(
     primitiveValue: number,
     primitiveKeyResultData: {

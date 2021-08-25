@@ -8,7 +8,11 @@ import { ORMProvider } from '@infrastructure/orm/orm.provider'
 
 import { GRPCService } from '../grpc.service'
 
-import { CalculateProgressRequest, ProgressHistoryRequest } from './requests/key-result.request'
+import {
+  CalculateProgressRequest,
+  ProgressHistoryRequest,
+  ProgressHistoryWithStaticHeadRequest,
+} from './requests/key-result.request'
 import { CalculateProgressResponse, ProgressHistoryResponse } from './responses/key-result.response'
 
 @Controller()
@@ -42,6 +46,34 @@ export class KeyResultController {
       window,
       startDate,
     })
+
+    return this.controllerAdapter.marshalResponse(result)
+  }
+
+  @GrpcMethod('KeyResultService')
+  protected async getProgressHistoryWithStaticHead(
+    request: ProgressHistoryWithStaticHeadRequest,
+  ): Promise<ProgressHistoryResponse> {
+    const window: DateWindowCategory =
+      KeyResultController.dateWindowCategoryHashmap[request.window ?? 0]
+    const startDate = new Date(request.startDate ?? Date.now())
+    const keyResultCheckIn = {
+      ...request.headKeyResultCheckInData,
+      createdAt: new Date(request.headKeyResultCheckInData.createdAt),
+    }
+
+    const history = await this.keyResultPorts.getProgressHistoryForKeyResultID(
+      request.keyResultId,
+      {
+        window,
+        startDate,
+      },
+    )
+
+    const result = this.keyResultPorts.pushKeyResultCheckInToProgressHistory(
+      history,
+      keyResultCheckIn,
+    )
 
     return this.controllerAdapter.marshalResponse(result)
   }
