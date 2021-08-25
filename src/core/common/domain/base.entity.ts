@@ -45,6 +45,14 @@ export abstract class Entity<P extends EntityProperties, O extends EntityPrimiti
     return entity instanceof Entity
   }
 
+  static marshalGenericProperties(primitives: EntityPrimitives): EntityProperties {
+    return {
+      id: new ID(primitives.id),
+      createdAt: new DateVO(primitives.createdAt),
+      updatedAt: new DateVO(primitives.updatedAt),
+    }
+  }
+
   public isEqual(object?: Entity<P, O>): boolean {
     if (object === null || object === undefined) {
       return false

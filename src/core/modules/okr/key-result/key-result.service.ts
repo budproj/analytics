@@ -6,6 +6,7 @@ import { ID } from '@core/common/domain/value-objects/id.value-object'
 import { SearchPorts } from '@core/common/ports/search.ports'
 import { SortingPorts } from '@core/common/ports/sorting.ports'
 
+import { KeyResultCheckIn } from './entities/key-result-check-in.entity'
 import { KeyResultProgressRecord } from './entities/progress-record.entity'
 import { KeyResultProgressRecordRepository } from './repositories/progress-record.repository'
 
@@ -60,5 +61,12 @@ export class KeyResultService {
     }
 
     return buckets
+  }
+
+  public generateProgressRecordForCheckIn(
+    checkIn: KeyResultCheckIn,
+    keyResultID: ID,
+  ): KeyResultProgressRecord {
+    return {} as any
   }
 }

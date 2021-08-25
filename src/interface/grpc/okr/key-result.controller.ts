@@ -70,7 +70,8 @@ export class KeyResultController {
       },
     )
 
-    const result = this.keyResultPorts.pushKeyResultCheckInToProgressHistory(
+    const result = await this.keyResultPorts.pushKeyResultCheckInToProgressHistory(
+      request.keyResultId,
       history,
       keyResultCheckIn,
     )

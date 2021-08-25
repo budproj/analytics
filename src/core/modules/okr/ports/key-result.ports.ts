@@ -5,6 +5,8 @@ import { ID } from '@core/common/domain/value-objects/id.value-object'
 import { NumberVO } from '@core/common/domain/value-objects/number.value-object'
 import { PrimaryPorts } from '@core/common/ports/primary.ports'
 
+import { KeyResultCheckIn } from '../key-result/entities/key-result-check-in.entity'
+import { KeyResultProgressRecord } from '../key-result/entities/progress-record.entity'
 import { TypeCategory } from '../key-result/enums/type-category.enum'
 import { KeyResultService } from '../key-result/key-result.service'
 import { KeyResultProgressRecordPrimitives } from '../key-result/primitives/progress-record.primitives'
@@ -45,14 +47,26 @@ export class KeyResultPorts extends PrimaryPorts {
     return this.unmarshalEntityList(historyBuckets)
   }
 
-  public pushKeyResultCheckInToProgressHistory(
-    history: KeyResultProgressRecordPrimitives[],
+  public async pushKeyResultCheckInToProgressHistory(
+    primitiveKeyResultID: string,
+    primitiveHistory: KeyResultProgressRecordPrimitives[],
     primitiveKeyResultCheckIn: {
       value: number
       createdAt: Date
     },
-  ): KeyResultProgressRecordPrimitives[] {
-    console.log(history, primitiveKeyResultCheckIn)
+  ): Promise<KeyResultProgressRecordPrimitives[]> {
+    const keyResultID = new ID(primitiveKeyResultID)
+
+    const headCheckIn = KeyResultCheckIn.loadUnknown(primitiveKeyResultCheckIn)
+    const headProgressRecord = this.keyResultService.generateProgressRecordForCheckIn(
+      headCheckIn,
+      keyResultID,
+    )
+
+    const history = primitiveHistory.map((primitiveProgressRecord) =>
+      KeyResultProgressRecord.load(primitiveProgressRecord),
+    )
+
     return []
   }
 
