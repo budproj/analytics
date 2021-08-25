@@ -7,6 +7,7 @@ with
     select
       id,
       key_result_id,
+      value,
       created_at,
       created_at as updated_at
     from stg_okr__key_result_check_in

@@ -10,6 +10,9 @@ export class KeyResultCheckInORMEntity
   extends ORMEntity
   implements KeyResultCheckInORMEntityInterface
 {
+  @Column('numeric')
+  public value!: number
+
   @Column()
   @RelationId((keyResultCheckIn: KeyResultCheckInORMEntity) => keyResultCheckIn.keyResult)
   public keyResultId: string

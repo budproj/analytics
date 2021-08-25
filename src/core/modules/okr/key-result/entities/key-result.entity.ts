@@ -1,9 +1,6 @@
 import { Entity } from '@core/common/domain/base.entity'
 
-import { KeyResultProgressRecordPrimitives } from '../primitives/progress-record.primitives'
-import { KeyResultProgressRecordProperties } from '../properties/progress-record.properties'
+import { KeyResultPrimitives } from '../primitives/key-result.primitives'
+import { KeyResultProperties } from '../properties/key-result.properties'
 
-export class KeyResult extends Entity<
-  KeyResultProgressRecordProperties,
-  KeyResultProgressRecordPrimitives
-> {}
+export class KeyResult extends Entity<KeyResultProperties, KeyResultPrimitives> {}
