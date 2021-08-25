@@ -43,12 +43,9 @@ export class ProgressRecord extends Entity<ProgressRecordProperties, ProgressRec
   }
 
   static fromCheckIn(checkIn: CheckIn, keyResult: KeyResult): ProgressRecord {
-    const { id: keyResultID, initialValue, goal } = keyResult
+    const { id: keyResultID } = keyResult
 
-    const offsetThreshold = initialValue.isBefore(goal) ? initialValue : goal
-    const baseThreshold = goal.isAfter(initialValue) ? goal : initialValue
-
-    const percentage = offsetThreshold.calculateProgress(checkIn.value, baseThreshold)
+    const percentage = keyResult.calculateValuePercentage(checkIn.value)
     const primitives = {
       keyResultId: keyResultID.value,
       progress: percentage.value,

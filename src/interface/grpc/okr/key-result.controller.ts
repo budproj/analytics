@@ -74,6 +74,9 @@ export class KeyResultController {
       request.keyResultId,
       history,
       keyResultCheckIn,
+      {
+        window,
+      },
     )
 
     return this.controllerAdapter.marshalResponse(result)

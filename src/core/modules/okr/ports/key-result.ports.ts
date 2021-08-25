@@ -54,11 +54,17 @@ export class KeyResultPorts extends PrimaryPorts {
       value: number
       createdAt: Date
     },
+    options: {
+      window?: DateWindowCategory
+    } = {},
   ): Promise<ProgressRecordPrimitives[]> {
+    options.window ??= DateWindowCategory.DAY
+
     const keyResultID = new ID(primitiveKeyResultID)
+    const bucketWindow = new DateWindow(options.window)
 
     const headCheckIn = CheckIn.loadUnknown(primitiveKeyResultCheckIn)
-    const headProgressRecord = this.keyResultService.generateProgressRecordForCheckIn(
+    const headProgressRecord = await this.keyResultService.generateProgressRecordForCheckIn(
       headCheckIn,
       keyResultID,
     )
@@ -67,7 +73,12 @@ export class KeyResultPorts extends PrimaryPorts {
       ProgressRecord.load(primitiveProgressRecord),
     )
 
-    return []
+    const historyBuckets = this.keyResultService.groupProgressHistoryToBuckets(
+      [...history, headProgressRecord],
+      bucketWindow,
+    )
+
+    return this.unmarshalEntityList(historyBuckets)
   }
 
   public calculateProgressForPrimitiveKeyResultdata(
