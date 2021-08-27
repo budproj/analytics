@@ -41,8 +41,24 @@ export abstract class Entity<P extends EntityProperties, O extends EntityPrimiti
     return 'createdAt'
   }
 
+  static generate(primitives: Partial<EntityPrimitives>): EntityProperties {
+    return {
+      id: primitives.id ? new ID(primitives.id) : ID.generate(),
+      createdAt: primitives.createdAt ? new DateVO(primitives.createdAt) : DateVO.now(),
+      updatedAt: primitives.updatedAt ? new DateVO(primitives.updatedAt) : DateVO.now(),
+    }
+  }
+
   static isEntity(entity: unknown): entity is Entity<any, any> {
     return entity instanceof Entity
+  }
+
+  static marshalGenericProperties(primitives: EntityPrimitives): EntityProperties {
+    return {
+      id: new ID(primitives.id),
+      createdAt: new DateVO(primitives.createdAt),
+      updatedAt: new DateVO(primitives.updatedAt),
+    }
   }
 
   public isEqual(object?: Entity<P, O>): boolean {
