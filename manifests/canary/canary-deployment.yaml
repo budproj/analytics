@@ -30,7 +30,7 @@ spec:
             - name: GRPC_PACKAGES
               value: keyResult
             - name: GRPC_PROTO_PATHS
-              value: src/interface/grpc/okr/protobuf/key-result.proto
+              value: dist/src/interface/grpc/okr/protobuf/key-result.proto
             - name: LOGGING_SERVICE_NAME
               value: analytics@stable
             - name: ORM_HOST
