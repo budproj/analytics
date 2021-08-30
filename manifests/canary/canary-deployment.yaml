@@ -25,7 +25,8 @@ spec:
         - name: analytics
           image: 904333181156.dkr.ecr.sa-east-1.amazonaws.com/analytics:$ECR_TAG
           ports:
-            - containerPort: 9090
+            - name: grpc
+              containerPort: 9090
           env:
             - name: GRPC_PACKAGES
               value: keyResult
