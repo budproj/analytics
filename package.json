@@ -24,7 +24,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "compile": "tsc",
     "clean": "rimraf -rf dist",
-    "start": "nest start",
+    "start": "node dist/src/main",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
