@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: analytics-stable
+  labels:
+    app.kubernetes.io/name: analytics-stable
+    app.kubernetes.io/part-of: analytics
+    app.kubernetes.io/component: application
+    app.kubernetes.io/version: 1.0.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: analytics-stable
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: analytics-stable
+        app.kubernetes.io/part-of: analytics
+        app.kubernetes.io/component: application
+        app.kubernetes.io/version: 1.0.0
+    spec:
+      containers:
+        - name: analytics
+          image: 904333181156.dkr.ecr.sa-east-1.amazonaws.com/analytics:$ECR_TAG
+          ports:
+            - containerPort: 9090
+          env:
+            - name: GRPC_PACKAGES
+              value: keyResult
+            - name: GRPC_PROTO_PATHS
+              value: src/interface/grpc/okr/protobuf/key-result.proto
+            - name: LOGGING_SERVICE_NAME
+              value: analytics@stable
+            - name: ORM_HOST
+              value: analytics.cka3r3gokfjc.sa-east-1.rds.amazonaws.com
+            - name: ORM_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: analytics
+                  key: orm-username
+            - name: ORM_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: analytics
+                  key: orm-password
+            - name: ORM_DATABASE
+              value: prod
