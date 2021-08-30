@@ -12,7 +12,7 @@ metadata:
     maesh.containo.us/scheme: h2c
 spec:
   sessionAffinity: None
-  clustrIP: None
+  clusterIP: None
   selector:
     app.kubernetes.io/name: analytics-canary
   ports:
