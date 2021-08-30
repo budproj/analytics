@@ -36,7 +36,15 @@
     "orm:migrate": "npm run orm migration:run",
     "orm:migration-revert": "npm run orm migration:revert",
     "orm:migration-format": "prettier --write 'src/infrastructure/orm/migrations/*.ts'",
-    "orm:migration-generate": "npm run orm migration:generate -- -n"
+    "orm:migration-generate": "npm run orm migration:generate -- -n",
+    "deploy": "run-s git:tag:canary build waypoint:build waypoint:deploy",
+    "release": "run-s git:tag:remove-canary git:tag:stable waypoint:up",
+    "git:tag:canary": "git tag canary -f && git push origin canary -f",
+    "git:tag:remove-canary": "git tag -d canary",
+    "git:tag:stable": "git tag stable -f && git push origin stable -f",
+    "waypoint:build": "waypoint build",
+    "waypoint:deploy": "waypoint deploy",
+    "waypoint:up": "waypoint up"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.3.7",
