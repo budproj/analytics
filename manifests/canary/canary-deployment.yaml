@@ -28,6 +28,8 @@ spec:
             - name: grpc
               containerPort: 50051
           env:
+            - name: GRPC_HOST
+              value: 0.0.0.0
             - name: GRPC_PORT
               value: '50051'
             - name: GRPC_PACKAGES
