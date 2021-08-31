@@ -16,6 +16,7 @@ spec:
   template:
     metadata:
       labels:
+        app: test
         app.kubernetes.io/name: analytics-canary
         app.kubernetes.io/part-of: analytics
         app.kubernetes.io/component: application

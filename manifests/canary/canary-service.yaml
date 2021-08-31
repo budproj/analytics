@@ -8,13 +8,11 @@ metadata:
     app.kubernetes.io/part-of: analytics
     app.kubernetes.io/component: service
     app.kubernetes.io/version: 1.0.0
-  annotations:
-    maesh.containo.us/scheme: h2c
 spec:
   sessionAffinity: None
   clusterIP: None
   selector:
-    app.kubernetes.io/name: analytics-canary
+    app: test
   ports:
     - name: grpc
       port: 9090
