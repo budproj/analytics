@@ -29,7 +29,7 @@ spec:
               containerPort: 50051
           env:
             - name: GRPC_PORT
-              value: 50051
+              value: '50051'
             - name: GRPC_PACKAGES
               value: keyResult
             - name: GRPC_PROTO_PATHS
