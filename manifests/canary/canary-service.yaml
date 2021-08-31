@@ -9,8 +9,6 @@ metadata:
     app.kubernetes.io/component: service
     app.kubernetes.io/version: 1.0.0
 spec:
-  sessionAffinity: None
-  clusterIP: None
   selector:
     app.kubernetes.io/name: analytics-canary
   ports:
