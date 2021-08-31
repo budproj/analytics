@@ -8,7 +8,7 @@ export const grpcConfig = registerAs(
   (): GRPCConfig => ({
     port: Number.parseInt(process.env.GRPC_PORT, 10),
     credentials: ServerCredentials.createInsecure(),
-    url: `localhost:${Number.parseInt(process.env.GRPC_PORT, 10)}`,
+    url: `${process.env.GRPC_HOST}:${Number.parseInt(process.env.GRPC_PORT, 10)}`,
     package: process.env.GRPC_PACKAGES.split(','),
     protoPath: process.env.GRPC_PROTO_PATHS.split(','),
   }),
