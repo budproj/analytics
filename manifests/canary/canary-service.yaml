@@ -12,7 +12,7 @@ spec:
   sessionAffinity: None
   clusterIP: None
   selector:
-    app: test
+    app.kubernetes.io/name: analytics-canary
   ports:
     - name: grpc
       port: 9090
