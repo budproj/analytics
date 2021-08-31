@@ -26,10 +26,10 @@ spec:
           image: 904333181156.dkr.ecr.sa-east-1.amazonaws.com/analytics:$ECR_TAG
           ports:
             - name: grpc
-              containerPort: 8080
+              containerPort: 50051
           env:
             - name: GRPC_PORT
-              value: '8080'
+              value: '50051'
             - name: GRPC_PACKAGES
               value: keyResult
             - name: GRPC_PROTO_PATHS
