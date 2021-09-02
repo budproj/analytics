@@ -82,7 +82,7 @@ export class KeyResultPorts extends PrimaryPorts {
     return this.unmarshalEntityList(historyBuckets)
   }
 
-  public calculateProgressForPrimitiveKeyResultdata(
+  public calculateProgressForPrimitiveKeyResultData(
     primitiveValue: number,
     primitiveKeyResultData: {
       initialValue: number
