@@ -89,7 +89,7 @@ export class KeyResultController {
     const type: TypeCategory =
       KeyResultController.typeCategoryHashmap[request.keyResultData.type ?? 0]
 
-    const progress = this.keyResultPorts.calculateProgressForPrimitiveKeyResultdata(request.value, {
+    const progress = this.keyResultPorts.calculateProgressForPrimitiveKeyResultData(request.value, {
       initialValue,
       goal,
       type,
