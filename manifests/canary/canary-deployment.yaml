@@ -37,7 +37,7 @@ spec:
             - name: GRPC_PROTO_PATHS
               value: dist/src/interface/grpc/okr/protobuf/key-result.proto
             - name: LOGGING_SERVICE_NAME
-              value: analytics@stable
+              value: analytics@canary
             - name: ORM_HOST
               value: analytics.cka3r3gokfjc.sa-east-1.rds.amazonaws.com
             - name: ORM_USERNAME
