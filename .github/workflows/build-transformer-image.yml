@@ -1,0 +1,52 @@
+name: buildTransformerImage
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  BuildTransformerImage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Docker Layer Caching
+        uses: satackey/action-docker-layer-caching@v0.0.11
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: sa-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push the transformer image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.REPO_NAME }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DW_HOST: ${{ secrets.DB_HOST }}
+          DW_USER: ${{ secrets.DB_USER }}
+          DW_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DW_DB: ${{ secrets.DB_DB }}
+          DW_SCHEMA: ${{ secrets.DB_SCHEMA }}
+        run: |
+          # Build a docker container and push it to ECR 
+          cd dbt
+          docker build \
+            --build-arg DB_HOST \
+            --build-arg DB_USER \
+            --build-arg DB_PASSWORD \
+            --build-arg DB_DB \
+            --build-arg DB_SCHEMA \
+            -t $ECR_REGISTRY/$ECR_REPOSITORY-transformer:$GITHUB_SHA .
+          echo "Pushing image to ECR..."
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY-transformer:$GITHUB_SHA
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY-transformer:$GITHUB_SHA"

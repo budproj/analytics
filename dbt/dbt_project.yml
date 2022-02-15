@@ -1,7 +1,7 @@
 name: analytics
 version: 1.0.0
 config-version: 2
-profile: normalize
+profile: default
 
 models:
   analytics:
