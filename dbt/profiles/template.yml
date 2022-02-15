@@ -12,9 +12,9 @@ default:
 
     prod:
       type: postgres
-      host: $DW_HOST
-      user: $DW_USER
-      password: $DW_PASSWORD
+      host: $DB_HOST
+      user: $DB_USER
+      password: $DB_PASSWORD
       port: 5432
-      dbname: $DW_DB
-      schema: $DW_SCHEMA
+      dbname: $DB_DB
+      schema: $DB_SCHEMA
