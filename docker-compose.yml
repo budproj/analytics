@@ -1,0 +1,32 @@
+version: '3.7'
+
+volumes:
+  postgres:
+
+services:
+  dev-app:
+    build: .
+    network_mode: service:db-postgres
+    env_file:
+      - ../.env
+    environment:
+      ORM_HOST: db-postgres
+      ORM_PORT: 5432
+      ORM_DB: dev
+      ORM_USERNAME: postgres
+      ORM_PASSWORD: postgres
+
+  db-postgres:
+    image: postgres
+    container_name: analytics-db-postgres
+    environment:
+      POSTGRES_DB: dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DATA: /data/postgres
+    restart: unless-stopped
+    volumes:
+      - type: volume
+        source: postgres
+        target: /data/postgres
+
